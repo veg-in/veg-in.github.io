@@ -8,7 +8,7 @@ export default function Login() {
   const navigate = useNavigate()
 
   return (
-    <div className="base-layout flex flex-col items-center justify-center px-6 text-[14px]">
+    <div className="base-layout flex flex-col items-center justify-center text-[14px]">
       <div className="mb-6 text-center">
         <h1 className="text-green mb-3 text-3xl font-semibold">Veg-in</h1>
         <img src="/logo.png" alt="loading..." className="mx-auto h-[50px] w-[50px]" />
