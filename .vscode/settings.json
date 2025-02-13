@@ -1,0 +1,17 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "prettier.enable": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+  // To better format svg
+  "files.associations": {
+    "*.svg": "html"
+  },
+  // Unknown At Rules ingore to fix Unknown at rule @tailwindcss(unknownAtRules)
+  "css.lint.unknownAtRules": "ignore",
+  "cSpell.words": ["classname", "commitlint", "immer", "svgr", "tailwindcss", "tanstack", "zustand"]
+}
