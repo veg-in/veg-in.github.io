@@ -29,34 +29,6 @@ export default function Login() {
           <li className="text-gray-700">채식 토마토 스튜 해봤는데, 연두보다 더...</li>
         </ul>
       </div>
-
-      <div className="mt-6">
-        <h3 className="text-lg font-bold">이번 주 맛집탐방은 여기 어때?</h3>
-        <div className="mt-2 flex space-x-4">
-          <Card className="w-1/2">
-            <CardContent>
-              <Image
-                src="/images/pasta.png" // Replace with actual image path
-                alt="Pasta Dish"
-                width={150}
-                height={150}
-                className="rounded-lg"
-              />
-            </CardContent>
-          </Card>
-          <Card className="w-1/2">
-            <CardContent>
-              <Image
-                src="/images/icecream.png" // Replace with actual image path
-                alt="Ice Cream"
-                width={150}
-                height={150}
-                className="rounded-lg"
-              />
-            </CardContent>
-          </Card>
-        </div>
-      </div>
     </div>
   )
 }
