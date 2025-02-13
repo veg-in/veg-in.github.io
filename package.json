@@ -73,5 +73,5 @@
       "prettier --ignore-unknown --write"
     ]
   },
-  "homepage": "https://veg-in.github.io/frontend"
+  "homepage": "https://veg-in.github.io"
 }

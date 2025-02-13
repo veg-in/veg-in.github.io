@@ -15,7 +15,7 @@ export function App() {
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router>
         <App />
       </Router>
     </QueryClientProvider>
