@@ -1,3 +1,11 @@
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { useState } from 'react';
 
 function App() {
@@ -7,6 +15,19 @@ function App() {
     <div className='min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4'>
       <div className='flex gap-8 mb-8'>
         <div className='text-6xl'>🔥</div>
+      </div>
+      <div className='mb-8'>
+        <DropdownMenu>
+          <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem>Billing</DropdownMenuItem>
+            <DropdownMenuItem>Team</DropdownMenuItem>
+            <DropdownMenuItem>Subscription</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
       <h1 className='text-4xl font-bold text-slate-800 mb-8'>Vite + React</h1>
       <div className='bg-white p-8 rounded-xl shadow-lg max-w-md w-full mb-8'>
