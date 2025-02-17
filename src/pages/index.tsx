@@ -3,13 +3,13 @@ import Landing from '@/components/LandingPage/Landing'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 
-function Home() {
+function Index() {
   const [showIntroduction, setShowIntroduction] = useState(false)
   const duration = 2000
   const navigate = useNavigate()
 
   const handleComplete = () => {
-    navigate('login')
+    navigate('/login')
   }
   useEffect(() => {
     const switchTimer = setTimeout(() => {
@@ -32,4 +32,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Index
