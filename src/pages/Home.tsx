@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Home() {
   const [count, setCount] = useState(0);
@@ -20,7 +21,14 @@ function Home() {
           Edit <code className='bg-slate-100 px-2 py-1 rounded text-sm font-mono'>src/App.tsx</code>{' '}
           and save to test HMR
         </p>
-        <a href='/test-be'>Go to BE TestPage</a>
+      </div>
+      <div className='bg-white p-8 rounded-xl shadow-lg max-w-md w-full mb-8'>
+        <Link
+          className='w-full block text-center bg-red-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg mb-4 transition-colors'
+          to={'/test-be'}
+        >
+          Go to BE TestPage
+        </Link>
       </div>
       <p className='text-slate-500 text-sm'>Click on the Vite and React logos to learn more</p>
     </div>
