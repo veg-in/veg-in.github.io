@@ -4,6 +4,7 @@
 
 @layer base {
   .base-layout {
+    width: 100vw;
     max-width: 600px;
     height: 100vh; /* h-screen과 동일한 효과 */
     margin: 0 auto;

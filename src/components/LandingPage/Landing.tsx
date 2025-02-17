@@ -25,13 +25,13 @@ function Landing({ duration = 2000, onFadeComplete }: LandingProps) {
 
   return (
     <main
-      className={`base-layout flex flex-col justify-center gap-y-10 transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}
+      className={`flex size-full flex-col justify-center gap-y-10 transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-100'}`}
     >
       <div className="text-green items-center justify-center text-center text-[40px] font-semibold">
         <p>비긴</p>
         <p>Veg-in</p>
       </div>
-      <img className="mx-auto h-[95px] w-[95px]" src="/logo.png" alt="Loading.." />
+      <img className="mx-auto size-[95px]" src="/logo.png" alt="Loading.." />
       <div className="items-center justify-center text-center text-[20px] font-semibold">
         <p>
           <span className="text-green">자연</span>을 사랑하고

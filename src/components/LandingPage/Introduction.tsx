@@ -29,7 +29,7 @@ function Introduction({ onComplete }: { onComplete?: () => void }) {
   ]
 
   return (
-    <main className="base-layout flex h-screen flex-col items-center justify-center">
+    <main className="flex size-full flex-col items-center justify-center">
       <motion.div
         className="text-start text-[36px] font-semibold"
         initial="hidden"

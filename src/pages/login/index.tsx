@@ -1,16 +1,16 @@
-import { Button } from '@/components/ui/button'
 import { FcGoogle } from 'react-icons/fc'
 import { FaApple } from 'react-icons/fa'
-import { useNavigate } from 'react-router'
+import { Button } from '@/components/ui/button'
+import { useLogin } from '@/hooks/useLogin'
 
 export default function Login() {
-  const navigate = useNavigate()
+  const { loginWith } = useLogin()
 
   return (
-    <div className="base-layout flex flex-col items-center justify-center p-6 text-[14px]">
+    <div className="flex size-full flex-col items-center justify-center p-6 text-[14px]">
       <div className="text-center">
         <h1 className="mb-2 text-3xl font-semibold text-green-600">Veg-in</h1>
-        <img src="/logo.png" alt="logo" className="mx-auto h-[50px] w-[50px]" />
+        <img src="/logo.png" alt="logo" className="mx-auto size-[50px]" />
       </div>
 
       <h2 className="mt-4 text-lg font-semibold">로그인 해주세요</h2>
@@ -22,7 +22,7 @@ export default function Login() {
         <Button
           variant="outline"
           className="flex w-full items-center justify-center border-gray-300"
-          onClick={() => navigate('/home')}
+          onClick={() => loginWith('Google')}
         >
           <FcGoogle className="mr-2" />
           Continue with Google
@@ -30,7 +30,7 @@ export default function Login() {
         <Button
           variant="outline"
           className="flex w-full items-center justify-center border-gray-300"
-          onClick={() => navigate('/home')}
+          onClick={() => loginWith('Apple')}
         >
           <FaApple className="mr-2" />
           Continue with Apple
@@ -38,14 +38,14 @@ export default function Login() {
         <Button
           className="flex w-full items-center justify-center border-gray-300"
           variant="outline"
-          onClick={() => navigate('/home')}
+          onClick={() => loginWith('Kakao')}
         >
           Continue with Kakao
         </Button>
         <Button
           className="flex w-full items-center justify-center border-gray-300"
           variant="outline"
-          onClick={() => navigate('/home')}
+          onClick={() => loginWith('Naver')}
         >
           Continue with Naver
         </Button>

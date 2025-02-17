@@ -1,0 +1,18 @@
+import { Outlet, useLocation } from 'react-router-dom'
+import Footer from './Footer'
+
+export default function Layout() {
+  const location = useLocation()
+
+  // Footer를 숨기고 싶은 페이지 목록
+  const noFooterPages = ['/', '/login']
+
+  return (
+    <div>
+      <div className="base-layout">
+        <Outlet />
+      </div>
+      {!noFooterPages.includes(location.pathname) && <Footer />}
+    </div>
+  )
+}
