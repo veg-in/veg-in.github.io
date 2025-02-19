@@ -12,7 +12,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div className='min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4'>
+    <div className='min-h-screen max-w-[600px] mx-auto bg-[#88D0E5] flex flex-col items-center justify-center p-4'>
       <div className='flex gap-8 mb-8'>
         <div className='text-6xl'>🔥</div>
       </div>
