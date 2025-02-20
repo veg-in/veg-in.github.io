@@ -7,7 +7,7 @@ import Quiz from '@/pages/Quiz';
 
 function App() {
   return (
-    <Router basename='/FRONTEND'>
+    <Router>
       <Routes>
         <Route element={<Layout />}>
           <Route path='/' element={<Landing />} />
