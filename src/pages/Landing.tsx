@@ -21,6 +21,20 @@ const Landing = () => {
           퀴즈 페이지
         </Link>
       </div>
+      <div className='flex gap-4 pt-2'>
+        <Link
+          to='/test-be'
+          className='px-4 py-2 bg-[#000000] text-white rounded-lg hover:bg-[#333333] transition-colors'
+        >
+          test-be
+        </Link>
+        <Link
+          to='/test-qr'
+          className='px-4 py-2 bg-[#000000] text-white rounded-lg hover:bg-[#333333] transition-colors'
+        >
+          test-qr
+        </Link>
+      </div>
     </>
   );
 };
