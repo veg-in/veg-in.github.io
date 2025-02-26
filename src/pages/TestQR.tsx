@@ -16,6 +16,7 @@ declare global {
 
 export default function TestQR() {
   const [locations, setLocations] = useState([
+    { title: '전체 보기', lat: 37.563743700106016, lng: 126.93702902334138 },
     { title: '중도', lat: 37.563743700106016, lng: 126.93702902334138 },
     { title: '백주년기념관', lat: 37.5620796504564, lng: 126.93805190387629 },
     { title: '경영관', lat: 37.56483268505036, lng: 126.93899474018608 },
@@ -33,14 +34,6 @@ export default function TestQR() {
       <div className='mb-4'>
         <h2 className='text-xl font-semibold mb-2'>위치 선택</h2>
         <div className='flex flex-wrap gap-2'>
-          {/* "전체 보기" 버튼 추가 */}
-          <button
-            className={`px-4 py-2 rounded ${selectedLocation === null ? 'bg-blue-500 text-white' : 'bg-gray-200'
-              }`}
-            // onClick={() => } // 전체 보기 클릭 시 ~~
-          >
-            전체 보기
-          </button>
           {locations.map((location, index) => (
             <button
               key={index}
@@ -83,8 +76,8 @@ export default function TestQR() {
 function KakaoMap({
   width = '100%',
   height = '400px',
-  latitude = 37.566826,
-  longitude = 126.9786567,
+  latitude = 37.563543608193534,
+  longitude = 126.93774509060312,
   level = 3,
 }: KakaoMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -146,6 +139,16 @@ function KakaoMap({
 
       marker.setMap(map);
       console.log('마커 추가됨');
+
+      // 모든 마커를 담을 bounds 객체 생성
+      // const bounds = new window.kakao.maps.LatLngBounds();
+      // locations.forEach((location) => {
+      //   const markerPosition = new window.kakao.maps.LatLng(location.lat, location.lng);
+      //   const marker = new window.kakao.maps.Marker({ position: markerPosition });
+
+      //   marker.setMap(map);
+      //   bounds.extend(markerPosition); // 범위에 마커 추가
+      // });
 
       // 지도 크기 조정 이벤트 발생
       setTimeout(() => {
