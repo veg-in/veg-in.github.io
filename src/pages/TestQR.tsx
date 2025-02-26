@@ -6,6 +6,7 @@ interface KakaoMapProps {
   latitude?: number;
   longitude?: number;
   level?: number;
+  locations: { title: string; lat: number; lng: number }[];
 }
 
 declare global {
@@ -54,6 +55,8 @@ export default function TestQR() {
           latitude={selectedLocation.lat}
           longitude={selectedLocation.lng}
           level={3}
+          locations={locations}
+
         />
       </div>
 
@@ -79,6 +82,7 @@ function KakaoMap({
   latitude = 37.563543608193534,
   longitude = 126.93774509060312,
   level = 3,
+  locations,
 }: KakaoMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
@@ -141,14 +145,14 @@ function KakaoMap({
       console.log('마커 추가됨');
 
       // 모든 마커를 담을 bounds 객체 생성
-      // const bounds = new window.kakao.maps.LatLngBounds();
-      // locations.forEach((location) => {
-      //   const markerPosition = new window.kakao.maps.LatLng(location.lat, location.lng);
-      //   const marker = new window.kakao.maps.Marker({ position: markerPosition });
+      const bounds = new window.kakao.maps.LatLngBounds();
+      locations.forEach((location) => {
+        const markerPosition = new window.kakao.maps.LatLng(location.lat, location.lng);
+        const marker = new window.kakao.maps.Marker({ position: markerPosition });
 
-      //   marker.setMap(map);
-      //   bounds.extend(markerPosition); // 범위에 마커 추가
-      // });
+        marker.setMap(map);
+        bounds.extend(markerPosition); // 범위에 마커 추가
+      });
 
       // 지도 크기 조정 이벤트 발생
       setTimeout(() => {
