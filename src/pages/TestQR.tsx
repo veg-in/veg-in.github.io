@@ -17,7 +17,7 @@ declare global {
 }
 
 export default function TestQR() {
-  const [locations, setLocations] = useState([
+  const locations = [
     { title: '전체 보기', lat: 37.56357067982097, lng: 126.93782429801615 },
     { title: '중도', lat: 37.563743700106016, lng: 126.93702902334138 },
     { title: '백주년기념관', lat: 37.5620796504564, lng: 126.93805190387629 },
@@ -25,7 +25,7 @@ export default function TestQR() {
     { title: '대운동장', lat: 37.56226633676402, lng: 126.93341687864819 },
     { title: '독수리상', lat: 37.56216023139825, lng: 126.93708977744795 },
     { title: '학관앞', lat: 37.56348529465163, lng: 126.93822334786489 },
-  ]);
+  ];
 
   const [selectedLocation, setSelectedLocation] = useState(locations[0]);
 
@@ -39,8 +39,9 @@ export default function TestQR() {
           {locations.map((location, index) => (
             <button
               key={index}
-              className={`px-4 py-2 rounded ${selectedLocation.title === location.title ? 'bg-blue-500 text-white' : 'bg-gray-200'
-                }`}
+              className={`px-4 py-2 rounded ${
+                selectedLocation.title === location.title ? 'bg-blue-500 text-white' : 'bg-gray-200'
+              }`}
               onClick={() => setSelectedLocation(location)}
             >
               {location.title}
@@ -120,7 +121,7 @@ function KakaoMap({
 
     document.head.appendChild(script);
 
-    return () => { };
+    return () => {};
   }, []);
 
   // 지도 초기화
@@ -168,7 +169,7 @@ function KakaoMap({
       console.error('지도 초기화 오류:', e);
       setError('지도를 표시하는데 실패했습니다');
     }
-  }, [latitude, longitude, level, isScriptLoaded]);
+  }, [latitude, longitude, level, isScriptLoaded, locations, showAll]);
 
   return (
     <div className='w-full'>
