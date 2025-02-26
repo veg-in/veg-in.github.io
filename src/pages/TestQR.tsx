@@ -6,6 +6,8 @@ interface KakaoMapProps {
   latitude?: number;
   longitude?: number;
   level?: number;
+  locations: { title: string; lat: number; lng: number }[];
+  showAll: boolean;
 }
 
 declare global {
@@ -16,9 +18,13 @@ declare global {
 
 export default function TestQR() {
   const [locations, setLocations] = useState([
-    { title: '카카오', lat: 37.566826, lng: 126.9786567 },
-    { title: '서울역', lat: 37.556026, lng: 126.972559 },
-    { title: '남산타워', lat: 37.551046, lng: 126.988169 },
+    { title: '전체 보기', lat: 37.56357067982097, lng: 126.93782429801615 },
+    { title: '중도', lat: 37.563743700106016, lng: 126.93702902334138 },
+    { title: '백주년기념관', lat: 37.5620796504564, lng: 126.93805190387629 },
+    { title: '경영관', lat: 37.56483268505036, lng: 126.93899474018608 },
+    { title: '대운동장', lat: 37.56226633676402, lng: 126.93341687864819 },
+    { title: '독수리상', lat: 37.56216023139825, lng: 126.93708977744795 },
+    { title: '학관앞', lat: 37.56348529465163, lng: 126.93822334786489 },
   ]);
 
   const [selectedLocation, setSelectedLocation] = useState(locations[0]);
@@ -33,9 +39,8 @@ export default function TestQR() {
           {locations.map((location, index) => (
             <button
               key={index}
-              className={`px-4 py-2 rounded ${
-                selectedLocation.title === location.title ? 'bg-blue-500 text-white' : 'bg-gray-200'
-              }`}
+              className={`px-4 py-2 rounded ${selectedLocation.title === location.title ? 'bg-blue-500 text-white' : 'bg-gray-200'
+                }`}
               onClick={() => setSelectedLocation(location)}
             >
               {location.title}
@@ -51,6 +56,8 @@ export default function TestQR() {
           latitude={selectedLocation.lat}
           longitude={selectedLocation.lng}
           level={3}
+          locations={locations}
+          showAll={selectedLocation.title === '전체 보기'}
         />
       </div>
 
@@ -73,9 +80,11 @@ export default function TestQR() {
 function KakaoMap({
   width = '100%',
   height = '400px',
-  latitude = 37.566826,
-  longitude = 126.9786567,
+  latitude = 37.563543608193534,
+  longitude = 126.93774509060312,
   level = 3,
+  locations,
+  showAll,
 }: KakaoMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
@@ -111,7 +120,7 @@ function KakaoMap({
 
     document.head.appendChild(script);
 
-    return () => {};
+    return () => { };
   }, []);
 
   // 지도 초기화
@@ -128,14 +137,28 @@ function KakaoMap({
       const map = new window.kakao.maps.Map(mapRef.current, options);
       console.log('지도 생성됨');
 
-      // 마커 추가
-      const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
-      const marker = new window.kakao.maps.Marker({
-        position: markerPosition,
-      });
+      if (showAll) {
+        // "전체 보기" 클릭하면 모든 마커 표시
+        const bounds = new window.kakao.maps.LatLngBounds();
 
-      marker.setMap(map);
-      console.log('마커 추가됨');
+        locations.forEach((location) => {
+          const markerPosition = new window.kakao.maps.LatLng(location.lat, location.lng);
+          const marker = new window.kakao.maps.Marker({ position: markerPosition });
+
+          marker.setMap(map);
+          bounds.extend(markerPosition); // 모든 마커가 지도 안에 들어오도록
+        });
+
+        map.setBounds(bounds); // 지도 크기 자동 조정
+        console.log('모든 마커 추가됨');
+      } else {
+        // 장소 선택 시, 마커 하나 표시
+        const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
+        const marker = new window.kakao.maps.Marker({ position: markerPosition });
+
+        marker.setMap(map);
+        console.log('단일 마커 추가됨');
+      }
 
       // 지도 크기 조정 이벤트 발생
       setTimeout(() => {
