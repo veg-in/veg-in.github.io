@@ -16,9 +16,12 @@ declare global {
 
 export default function TestQR() {
   const [locations, setLocations] = useState([
-    { title: '카카오', lat: 37.566826, lng: 126.9786567 },
-    { title: '서울역', lat: 37.556026, lng: 126.972559 },
-    { title: '남산타워', lat: 37.551046, lng: 126.988169 },
+    { title: '중도', lat: 37.563743700106016, lng: 126.93702902334138 },
+    { title: '백주년기념관', lat: 37.5620796504564, lng: 126.93805190387629 },
+    { title: '경영관', lat: 37.56483268505036, lng: 126.93899474018608 },
+    { title: '대운동장', lat: 37.56226633676402, lng: 126.93341687864819 },
+    { title: '독수리상', lat: 37.56216023139825, lng: 126.93708977744795 },
+    { title: '학관앞', lat: 37.56348529465163, lng: 126.93822334786489 },
   ]);
 
   const [selectedLocation, setSelectedLocation] = useState(locations[0]);
@@ -30,12 +33,19 @@ export default function TestQR() {
       <div className='mb-4'>
         <h2 className='text-xl font-semibold mb-2'>위치 선택</h2>
         <div className='flex flex-wrap gap-2'>
+          {/* "전체 보기" 버튼 추가 */}
+          <button
+            className={`px-4 py-2 rounded ${selectedLocation === null ? 'bg-blue-500 text-white' : 'bg-gray-200'
+              }`}
+            // onClick={() => } // 전체 보기 클릭 시 ~~
+          >
+            전체 보기
+          </button>
           {locations.map((location, index) => (
             <button
               key={index}
-              className={`px-4 py-2 rounded ${
-                selectedLocation.title === location.title ? 'bg-blue-500 text-white' : 'bg-gray-200'
-              }`}
+              className={`px-4 py-2 rounded ${selectedLocation.title === location.title ? 'bg-blue-500 text-white' : 'bg-gray-200'
+                }`}
               onClick={() => setSelectedLocation(location)}
             >
               {location.title}
@@ -111,7 +121,7 @@ function KakaoMap({
 
     document.head.appendChild(script);
 
-    return () => {};
+    return () => { };
   }, []);
 
   // 지도 초기화
