@@ -7,6 +7,7 @@ interface KakaoMapProps {
   longitude?: number;
   level?: number;
   locations: { title: string; lat: number; lng: number }[];
+  showAll: boolean;
 }
 
 declare global {
@@ -17,7 +18,7 @@ declare global {
 
 export default function TestQR() {
   const [locations, setLocations] = useState([
-    { title: '전체 보기', lat: 37.563743700106016, lng: 126.93702902334138 },
+    { title: '전체 보기', lat: 37.56357067982097, lng: 126.93782429801615 },
     { title: '중도', lat: 37.563743700106016, lng: 126.93702902334138 },
     { title: '백주년기념관', lat: 37.5620796504564, lng: 126.93805190387629 },
     { title: '경영관', lat: 37.56483268505036, lng: 126.93899474018608 },
@@ -56,7 +57,7 @@ export default function TestQR() {
           longitude={selectedLocation.lng}
           level={3}
           locations={locations}
-
+          showAll={selectedLocation.title === '전체 보기'}
         />
       </div>
 
@@ -83,6 +84,7 @@ function KakaoMap({
   longitude = 126.93774509060312,
   level = 3,
   locations,
+  showAll,
 }: KakaoMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
@@ -135,24 +137,28 @@ function KakaoMap({
       const map = new window.kakao.maps.Map(mapRef.current, options);
       console.log('지도 생성됨');
 
-      // 마커 추가
-      const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
-      const marker = new window.kakao.maps.Marker({
-        position: markerPosition,
-      });
+      if (showAll) {
+        // "전체 보기" 클릭하면 모든 마커 표시
+        const bounds = new window.kakao.maps.LatLngBounds();
 
-      marker.setMap(map);
-      console.log('마커 추가됨');
+        locations.forEach((location) => {
+          const markerPosition = new window.kakao.maps.LatLng(location.lat, location.lng);
+          const marker = new window.kakao.maps.Marker({ position: markerPosition });
 
-      // 모든 마커를 담을 bounds 객체 생성
-      const bounds = new window.kakao.maps.LatLngBounds();
-      locations.forEach((location) => {
-        const markerPosition = new window.kakao.maps.LatLng(location.lat, location.lng);
+          marker.setMap(map);
+          bounds.extend(markerPosition); // 모든 마커가 지도 안에 들어오도록
+        });
+
+        map.setBounds(bounds); // 지도 크기 자동 조정
+        console.log('모든 마커 추가됨');
+      } else {
+        // 장소 선택 시, 마커 하나 표시
+        const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
         const marker = new window.kakao.maps.Marker({ position: markerPosition });
 
         marker.setMap(map);
-        bounds.extend(markerPosition); // 범위에 마커 추가
-      });
+        console.log('단일 마커 추가됨');
+      }
 
       // 지도 크기 조정 이벤트 발생
       setTimeout(() => {
