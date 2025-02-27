@@ -19,12 +19,12 @@ export function Button({ children, onClick, className }: ButtonProps) {
 const Quiz = () => {
   return (
     <>
-    <div className="mt-20 flex flex-col gap-y-40 justify-center items-center">
+    <div className="mt-2 flex flex-col gap-y-40 justify-center items-center">
       <div>1/11</div>
       <div className="font-bold">대학생활 첫 걸음! 수강신청, 어떻게 할래?</div>
       <div className="flex flex-col gap-y-15">
-        <Button onClick={() => console.log("1")}>21학점 듣고 조기졸업🏃</Button>
-        <Button onClick={() => console.log("2")}>15학점 듣고 초과학기📈</Button>
+        <Button className="hover:bg-blue-500" onClick={() => console.log("1")}>21학점 듣고 조기졸업🏃</Button>
+        <Button className="hover:bg-blue-500" onClick={() => console.log("2")}>15학점 듣고 초과학기📈</Button>
       </div>
     </div>
     </>
