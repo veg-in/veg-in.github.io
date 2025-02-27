@@ -4,7 +4,6 @@ import { BalanceGameQuestions } from '@/data/BalanceGame';
 const BalanceGame = () => {
   const [currentQuestionIndex, setcurrentQuestionIndex] = useState(0);
   const [results, setResults] = useState(['']);
-  // const [totalResultCount, setTotalResultCount] = useState({});
   const [finalResult, setfinalResult] = useState('');
 
   useEffect(() => {
@@ -30,39 +29,45 @@ const BalanceGame = () => {
     });
 
     setfinalResult(sortedKeys[0]);
-    // setTotalResultCount(resultCount);
   }, [results]);
   return (
     <>
       <h1 className='text-4xl font-bold mb-8'>대학 생활 밸런스 게임</h1>
 
-      <h2 className='text-xl mb-16'>대학생활 첫 걸음! 수강 신청, 어떻게 할래?</h2>
-
       {currentQuestionIndex < BalanceGameQuestions.length && (
         <div className='flex flex-col items-center'>
-          <h2 className='text-md'>
-            {currentQuestionIndex + 1}/{BalanceGameQuestions.length}
-          </h2>
-          <h2 className='text-2xl mb-8'>{BalanceGameQuestions[currentQuestionIndex].topic}</h2>
-          <div className='flex flex-col space-y-16'>
-            <button
-              className='cursor-pointer py-2 w-90 border-2 border-black bg-yellow-400 active:bg-yellow-700 rounded-lg'
-              onClick={() => {
-                setcurrentQuestionIndex(currentQuestionIndex + 1);
-                setResults([...results, BalanceGameQuestions[currentQuestionIndex].selects.top.type]);
-              }}
-            >
-              {BalanceGameQuestions[currentQuestionIndex].selects.top.select}
-            </button>
-            <button
-              className='cursor-pointer py-2 w-90 border-2 border-black bg-yellow-400 active:bg-yellow-700 rounded-lg '
-              onClick={() => {
-                setcurrentQuestionIndex(currentQuestionIndex + 1);
-                setResults([...results, BalanceGameQuestions[currentQuestionIndex].selects.bottom.type]);
-              }}
-            >
-              {BalanceGameQuestions[currentQuestionIndex].selects.bottom.select}
-            </button>
+          <h2 className='text-xl mb-16'>대학생활 첫 걸음! 수강 신청, 어떻게 할래?</h2>
+          <div className='flex flex-col items-center'>
+            <h2 className='text-md'>
+              {currentQuestionIndex + 1}/{BalanceGameQuestions.length}
+            </h2>
+            <h2 className='text-2xl mb-8'>{BalanceGameQuestions[currentQuestionIndex].topic}</h2>
+            <div className='flex flex-col space-y-16'>
+              <button
+                className='cursor-pointer py-2 w-90 border-2 border-black bg-yellow-400 active:bg-yellow-700 rounded-lg'
+                onClick={() => {
+                  setcurrentQuestionIndex(currentQuestionIndex + 1);
+                  setResults([
+                    ...results,
+                    BalanceGameQuestions[currentQuestionIndex].selects.top.type,
+                  ]);
+                }}
+              >
+                {BalanceGameQuestions[currentQuestionIndex].selects.top.select}
+              </button>
+              <button
+                className='cursor-pointer py-2 w-90 border-2 border-black bg-yellow-400 active:bg-yellow-700 rounded-lg '
+                onClick={() => {
+                  setcurrentQuestionIndex(currentQuestionIndex + 1);
+                  setResults([
+                    ...results,
+                    BalanceGameQuestions[currentQuestionIndex].selects.bottom.type,
+                  ]);
+                }}
+              >
+                {BalanceGameQuestions[currentQuestionIndex].selects.bottom.select}
+              </button>
+            </div>
           </div>
         </div>
       )}
