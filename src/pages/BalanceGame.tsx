@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { BalanceGameQuestions } from '@/data/BalanceGame';
 
 const BalanceGame = () => {
-  const [count, setCount] = useState(0);
+  const [currentQuestionIndex, setcurrentQuestionIndex] = useState(0);
   const [results, setResults] = useState(['']);
-  const [totalResultCount, setTotalResultCount] = useState({});
-  const [top, setTop] = useState('');
+  // const [totalResultCount, setTotalResultCount] = useState({});
+  const [finalResult, setfinalResult] = useState('');
 
   useEffect(() => {
     const resultCount = results.reduce<Record<string, number>>((acc, item) => {
@@ -29,8 +29,8 @@ const BalanceGame = () => {
       return aPriority - bPriority;
     });
 
-    setTop(sortedKeys[0]);
-    setTotalResultCount(resultCount);
+    setfinalResult(sortedKeys[0]);
+    // setTotalResultCount(resultCount);
   }, [results]);
   return (
     <>
@@ -38,41 +38,38 @@ const BalanceGame = () => {
 
       <h2 className='text-xl mb-16'>대학생활 첫 걸음! 수강 신청, 어떻게 할래?</h2>
 
-      {count < BalanceGameQuestions.length && (
+      {currentQuestionIndex < BalanceGameQuestions.length && (
         <div className='flex flex-col items-center'>
-          <h2 className='text-xl'>
-            ({count + 1}/{BalanceGameQuestions.length})
+          <h2 className='text-md'>
+            {currentQuestionIndex + 1}/{BalanceGameQuestions.length}
           </h2>
-          <h2 className='text-xl mb-8'>{BalanceGameQuestions[count].topic}</h2>
+          <h2 className='text-2xl mb-8'>{BalanceGameQuestions[currentQuestionIndex].topic}</h2>
           <div className='flex flex-col space-y-16'>
             <button
               className='cursor-pointer py-2 w-90 border-2 border-black bg-yellow-400 active:bg-yellow-700 rounded-lg'
               onClick={() => {
-                setCount(count + 1);
-                setResults([...results, BalanceGameQuestions[count].selects.top.type]);
+                setcurrentQuestionIndex(currentQuestionIndex + 1);
+                setResults([...results, BalanceGameQuestions[currentQuestionIndex].selects.top.type]);
               }}
             >
-              {BalanceGameQuestions[count].selects.top.select}
+              {BalanceGameQuestions[currentQuestionIndex].selects.top.select}
             </button>
             <button
               className='cursor-pointer py-2 w-90 border-2 border-black bg-yellow-400 active:bg-yellow-700 rounded-lg '
               onClick={() => {
-                setCount(count + 1);
-                setResults([...results, BalanceGameQuestions[count].selects.bottom.type]);
+                setcurrentQuestionIndex(currentQuestionIndex + 1);
+                setResults([...results, BalanceGameQuestions[currentQuestionIndex].selects.bottom.type]);
               }}
             >
-              {BalanceGameQuestions[count].selects.bottom.select}
+              {BalanceGameQuestions[currentQuestionIndex].selects.bottom.select}
             </button>
           </div>
         </div>
       )}
-      {count === BalanceGameQuestions.length && (
+      {currentQuestionIndex === BalanceGameQuestions.length && (
         <div className='flex flex-col items-center'>
-          <h1 className='text-2xl'>결과</h1>
-          <p>(높음) 감투, 집순 , 욜로 , 공부 , N잡 , 연애 , 갓생 , 인싸 (낮음)</p>
-
-          <p>{JSON.stringify(totalResultCount)}</p>
-          <p>{top}</p>
+          <h1 className='text-xl mb-8'>결과</h1>
+          <p className='text-3xl'>{finalResult}</p>
         </div>
       )}
     </>
