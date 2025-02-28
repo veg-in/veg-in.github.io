@@ -7,7 +7,7 @@ const Landing = () => {
         <div className='text-7xl'>🦅</div>
       </div>
       <h1 className='text-4xl font-bold mb-8'>DOKPAMI</h1>
-      <div className='flex gap-4'>
+      <div className='flex flex-col gap-4 w-full max-w-md text-center'>
         <Link
           to='/about'
           className='px-4 py-2 bg-[#FFCE00] text-black rounded-lg border-2 border-gray-950 hover:bg-[#E6B800] transition-colors'
@@ -15,13 +15,17 @@ const Landing = () => {
           소개 페이지
         </Link>
         <Link
-          to='/quiz'
+          to='/aboutnext'
+          className='px-4 py-2 bg-[#FFCE00] text-black rounded-lg border-2 border-gray-950 hover:bg-[#E6B800] transition-colors'
+        >
+          AboutNext 페이지
+        </Link>
+        <Link
+          to='/balancegame'
           className='px-4 py-2 bg-[#FF0000] text-white rounded-lg hover:bg-[#CC0000] transition-colors'
         >
-          퀴즈 페이지
+          밸런스 게임
         </Link>
-      </div>
-      <div className='flex gap-4 pt-2'>
         <Link
           to='/test-be'
           className='px-4 py-2 bg-[#000000] text-white rounded-lg hover:bg-[#333333] transition-colors'
@@ -34,6 +38,7 @@ const Landing = () => {
         >
           test-qr
         </Link>
+        
       </div>
     </>
   );

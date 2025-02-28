@@ -54,8 +54,9 @@ export default function TestQR() {
           {locations.map((location, index) => (
             <button
               key={index}
-              className={`px-4 py-2 rounded ${selectedLocation.title === location.title ? 'bg-blue-500 text-white' : 'bg-gray-200'
-                }`}
+              className={`px-4 py-2 rounded ${
+                selectedLocation.title === location.title ? 'bg-blue-500 text-white' : 'bg-gray-200'
+              }`}
               onClick={() => setSelectedLocation(location)}
             >
               {location.title}
@@ -138,7 +139,7 @@ function KakaoMap({
 
     document.head.appendChild(script);
 
-    return () => { };
+    return () => {};
   }, []);
 
   // 지도 초기화
