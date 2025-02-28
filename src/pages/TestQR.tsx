@@ -17,7 +17,7 @@ declare global {
 }
 
 export default function TestQR() {
-  const [locations, setLocations] = useState([
+  const locations = [
     { title: '전체 보기', lat: 37.56357067982097, lng: 126.93782429801615 },
     { title: '중도', lat: 37.563743700106016, lng: 126.93702902334138 },
     { title: '백주년기념관', lat: 37.5620796504564, lng: 126.93805190387629 },
@@ -25,7 +25,7 @@ export default function TestQR() {
     { title: '대운동장', lat: 37.56226633676402, lng: 126.93341687864819 },
     { title: '독수리상', lat: 37.56216023139825, lng: 126.93708977744795 },
     { title: '학관앞', lat: 37.56348529465163, lng: 126.93822334786489 },
-  ]);
+  ];
 
   const [selectedLocation, setSelectedLocation] = useState(locations[0]);
 
@@ -137,13 +137,18 @@ function KakaoMap({
       const map = new window.kakao.maps.Map(mapRef.current, options);
       console.log('지도 생성됨');
 
+    
+      const markerImgSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+      const imageSize = new window.kakao.maps.Size(24, 35);   
+      const markerImg = new window.kakao.maps.MarkerImage(markerImgSrc, imageSize); // 마커 이미지를 생성
+
       if (showAll) {
         // "전체 보기" 클릭하면 모든 마커 표시
-        const bounds = new window.kakao.maps.LatLngBounds();
+        const bounds = new window.kakao.maps.LatLngBounds(); // 여러 개 좌표를 포함하는 경계 상자 생성
 
         locations.forEach((location) => {
           const markerPosition = new window.kakao.maps.LatLng(location.lat, location.lng);
-          const marker = new window.kakao.maps.Marker({ position: markerPosition });
+          const marker = new window.kakao.maps.Marker({ position: markerPosition, image: markerImg });
 
           marker.setMap(map);
           bounds.extend(markerPosition); // 모든 마커가 지도 안에 들어오도록
@@ -154,7 +159,7 @@ function KakaoMap({
       } else {
         // 장소 선택 시, 마커 하나 표시
         const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
-        const marker = new window.kakao.maps.Marker({ position: markerPosition });
+        const marker = new window.kakao.maps.Marker({ position: markerPosition, image: markerImg });
 
         marker.setMap(map);
         console.log('단일 마커 추가됨');
@@ -168,20 +173,23 @@ function KakaoMap({
       console.error('지도 초기화 오류:', e);
       setError('지도를 표시하는데 실패했습니다');
     }
-  }, [latitude, longitude, level, isScriptLoaded]);
+  }, [latitude, longitude, level, isScriptLoaded, locations, showAll]);
 
-  return (
-    <div className='w-full'>
-      {error ? (
-        <div className='text-red-500 text-center py-4'>{error}</div>
-      ) : !isScriptLoaded ? (
-        <div className='text-center py-4'>지도를 불러오는 중...</div>
-      ) : null}
-      <div
-        ref={mapRef}
-        style={{ width, height, display: error ? 'none' : 'block' }}
-        className='border rounded-lg'
-      />
-    </div>
-  );
+
+
+return (
+  <div className='w-full'>
+    {error ? (
+      <div className='text-red-500 text-center py-4'>{error}</div>
+    ) : !isScriptLoaded ? (
+      <div className='text-center py-4'>지도를 불러오는 중...</div>
+    ) : null}
+    <div
+      ref={mapRef}
+      style={{ width, height, display: error ? 'none' : 'block' }}
+      className='border rounded-lg'
+    />
+  </div>
+);
+
 }
