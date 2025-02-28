@@ -25,7 +25,7 @@ const BalanceGameButton = ({ label, onClick }: BalanceGameButtonProps) => {
 
 const sendGameResult = async ({ user, result }: BalanceGameResult) => {
   try {
-    const response = await fetch('http://localhost:5000/balancegame/results', {
+    const response = await fetch('https://backend-60km.onrender.com/balancegame/results', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user, result }),
