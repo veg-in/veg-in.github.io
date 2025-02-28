@@ -5,6 +5,8 @@ import About from '@/pages/About';
 import BalanceGame from '@/pages/BalanceGame';
 import TestBE from '@/pages/TestBE';
 import TestQR from './pages/TestQR';
+import Result from '@/pages/Result';
+import AboutNext from '@/pages/AboutNext';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route path='/balancegame' element={<BalanceGame />} />
           <Route path='/test-be' element={<TestBE />} />
           <Route path='/test-qr' element={<TestQR />} />
+          <Route path='/result' element={<Result />} />
+          <Route path='/aboutnext' element={<AboutNext />} />
         </Route>
       </Routes>
     </Router>
