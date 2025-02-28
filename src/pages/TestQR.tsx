@@ -137,13 +137,17 @@ function KakaoMap({
       const map = new window.kakao.maps.Map(mapRef.current, options);
       console.log('지도 생성됨');
 
+      let selectedMarkers: any[] = []; // 선택된 마커 저장 변수
     
       const markerImgSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+      const selectedMarkerImgSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"; // 선택된 마커 이미지
       const normalSize = new window.kakao.maps.Size(24, 35); // 기본 마커 사이즈   
-      const hoverSize = new window.kakao.maps.Size(32, 45); // 마우스 오버시 마커 사이즈
+      const hoverSize = new window.kakao.maps.Size(29, 40); // 마우스 오버시 마커 사이즈
+      const selectedSize = new window.kakao.maps.Size(35, 38); // 마우스 오버시 마커 사이즈
 
       const normalMarkerImg = new window.kakao.maps.MarkerImage(markerImgSrc, normalSize); // 기본 마커 이미지를 생성
       const hoverMarkerImg = new window.kakao.maps.MarkerImage(markerImgSrc, hoverSize); // 기본 마커 이미지를 생성
+      const selectedMarkerImg = new window.kakao.maps.MarkerImage(selectedMarkerImgSrc, selectedSize); // 클릭 시 이미지
 
       if (showAll) {
         // "전체 보기" 클릭하면 모든 마커 표시
@@ -157,12 +161,25 @@ function KakaoMap({
           bounds.extend(markerPosition); // 모든 마커가 지도 안에 들어오도록
 
           window.kakao.maps.event.addListener(marker, 'mouseover', () => {
-            marker.setImage(hoverMarkerImg); // 마커 크기 증가
+            if (!selectedMarkers.includes(marker)) { // 선택 마커 제외
+              marker.setImage(hoverMarkerImg); //  마우스 오버 -> 마커 크기 증가
+            }
           });
 
           window.kakao.maps.event.addListener(marker, 'mouseout', () => {
-            marker.setImage(normalMarkerImg); // 원래 크기로 복구
+            if (!selectedMarkers.includes(marker)) { // 선택 마커 제외
+              marker.setImage(normalMarkerImg); // 마우스 아웃 -> 원래 크기로 복구
+            }
           });
+
+          window.kakao.maps.event.addListener(marker, 'click', () => {
+            if (!selectedMarkers.includes(marker)) {
+              marker.setImage(selectedMarkerImg); // 클릭한 마커는 빨간색으로 변경
+              selectedMarkers.push(marker); // ✅ 선택된 마커 배열에 추가
+            }
+          });
+
+      
         });
 
         map.setBounds(bounds); // 지도 크기 자동 조정
