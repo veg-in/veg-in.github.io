@@ -105,7 +105,7 @@ function KakaoMap({
   onMarkerClick, // 마커 클릭 이벤트
 }: KakaoMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstance = useRef<any>(null);
+  // const mapInstance = useRef<any>(null);
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
