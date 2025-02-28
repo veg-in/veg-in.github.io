@@ -34,13 +34,6 @@ const Landing = () => {
         >
           test-qr
         </Link>
-
-        <Link
-          to='/result'
-          className='px-4 py-2 bg-[#FF0000] text-white rounded-lg hover:bg-[#CC0000] transition-colors'
-        >
-          퀴즈 결과 페이지
-        </Link>
         <Link
           to='/aboutnext'
           className='px-4 py-2 bg-[#FF0000] text-white rounded-lg hover:bg-[#CC0000] transition-colors'
