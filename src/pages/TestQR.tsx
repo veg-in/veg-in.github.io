@@ -139,8 +139,11 @@ function KakaoMap({
 
     
       const markerImgSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-      const imageSize = new window.kakao.maps.Size(24, 35);   
-      const markerImg = new window.kakao.maps.MarkerImage(markerImgSrc, imageSize); // 마커 이미지를 생성
+      const normalSize = new window.kakao.maps.Size(24, 35); // 기본 마커 사이즈   
+      const hoverSize = new window.kakao.maps.Size(32, 45); // 마우스 오버시 마커 사이즈
+
+      const normalMarkerImg = new window.kakao.maps.MarkerImage(markerImgSrc, normalSize); // 기본 마커 이미지를 생성
+      const hoverMarkerImg = new window.kakao.maps.MarkerImage(markerImgSrc, hoverSize); // 기본 마커 이미지를 생성
 
       if (showAll) {
         // "전체 보기" 클릭하면 모든 마커 표시
@@ -148,10 +151,18 @@ function KakaoMap({
 
         locations.forEach((location) => {
           const markerPosition = new window.kakao.maps.LatLng(location.lat, location.lng);
-          const marker = new window.kakao.maps.Marker({ position: markerPosition, image: markerImg });
+          const marker = new window.kakao.maps.Marker({ position: markerPosition, image: normalMarkerImg });
 
           marker.setMap(map);
           bounds.extend(markerPosition); // 모든 마커가 지도 안에 들어오도록
+
+          window.kakao.maps.event.addListener(marker, 'mouseover', () => {
+            marker.setImage(hoverMarkerImg); // 마커 크기 증가
+          });
+
+          window.kakao.maps.event.addListener(marker, 'mouseout', () => {
+            marker.setImage(normalMarkerImg); // 원래 크기로 복구
+          });
         });
 
         map.setBounds(bounds); // 지도 크기 자동 조정
@@ -159,12 +170,17 @@ function KakaoMap({
       } else {
         // 장소 선택 시, 마커 하나 표시
         const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
-        const marker = new window.kakao.maps.Marker({ position: markerPosition, image: markerImg });
+        const marker = new window.kakao.maps.Marker({ position: markerPosition, image: normalMarkerImg });
+        window.kakao.maps.event.addListener(marker, 'mouseover', () => {
+          marker.setImage(hoverMarkerImg); // 마커 크기 증가
+        });
 
+        window.kakao.maps.event.addListener(marker, 'mouseout', () => {
+          marker.setImage(normalMarkerImg); // 원래 크기로 복구
+        });
         marker.setMap(map);
         console.log('단일 마커 추가됨');
       }
-
       // 지도 크기 조정 이벤트 발생
       setTimeout(() => {
         window.dispatchEvent(new Event('resize'));
