@@ -1,6 +1,23 @@
 import { useEffect, useState } from 'react';
 import { BalanceGameQuestions } from '@/data/BalanceGame';
 
+// 버튼 컴포넌트 분리
+interface BalanceGameButtonProps {
+  label: string;
+  onClick: () => void;
+}
+
+const BalanceGameButton = ({ label, onClick }: BalanceGameButtonProps) => {
+  return (
+    <button
+      className='cursor-pointer py-2 w-90 border-2 border-black bg-yellow-400 active:bg-yellow-700 rounded-lg'
+      onClick={onClick}
+    >
+      {label}
+    </button>
+  );
+};
+
 const BalanceGame = () => {
   const [currentQuestionIndex, setcurrentQuestionIndex] = useState(0);
   const [results, setResults] = useState(['']);
@@ -30,6 +47,7 @@ const BalanceGame = () => {
 
     setfinalResult(sortedKeys[0]);
   }, [results]);
+
   return (
     <>
       <h1 className='text-4xl font-bold mb-8'>대학 생활 밸런스 게임</h1>
@@ -43,8 +61,8 @@ const BalanceGame = () => {
             </h2>
             <h2 className='text-2xl mb-8'>{BalanceGameQuestions[currentQuestionIndex].topic}</h2>
             <div className='flex flex-col space-y-16'>
-              <button
-                className='cursor-pointer py-2 w-90 border-2 border-black bg-yellow-400 active:bg-yellow-700 rounded-lg'
+              <BalanceGameButton
+                label={BalanceGameQuestions[currentQuestionIndex].selects.top.select}
                 onClick={() => {
                   setcurrentQuestionIndex(currentQuestionIndex + 1);
                   setResults([
@@ -52,11 +70,9 @@ const BalanceGame = () => {
                     BalanceGameQuestions[currentQuestionIndex].selects.top.type,
                   ]);
                 }}
-              >
-                {BalanceGameQuestions[currentQuestionIndex].selects.top.select}
-              </button>
-              <button
-                className='cursor-pointer py-2 w-90 border-2 border-black bg-yellow-400 active:bg-yellow-700 rounded-lg '
+              />
+              <BalanceGameButton
+                label={BalanceGameQuestions[currentQuestionIndex].selects.bottom.select}
                 onClick={() => {
                   setcurrentQuestionIndex(currentQuestionIndex + 1);
                   setResults([
@@ -64,9 +80,7 @@ const BalanceGame = () => {
                     BalanceGameQuestions[currentQuestionIndex].selects.bottom.type,
                   ]);
                 }}
-              >
-                {BalanceGameQuestions[currentQuestionIndex].selects.bottom.select}
-              </button>
+              />
             </div>
           </div>
         </div>
