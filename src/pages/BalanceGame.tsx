@@ -7,6 +7,11 @@ interface BalanceGameButtonProps {
   onClick: () => void;
 }
 
+interface BalanceGameResult {
+  user: string;
+  result: string;
+}
+
 const BalanceGameButton = ({ label, onClick }: BalanceGameButtonProps) => {
   return (
     <button
@@ -18,7 +23,27 @@ const BalanceGameButton = ({ label, onClick }: BalanceGameButtonProps) => {
   );
 };
 
+const sendGameResult = async ({ user, result }: BalanceGameResult) => {
+  try {
+    const response = await fetch('http://localhost:5000/balancegame/results', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user, result }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Response data:', data);
+    } else {
+      console.error('Failed to send data:', response.status);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
 const BalanceGame = () => {
+  const gameQuestions = BalanceGameQuestions2;
   const [currentQuestionIndex, setcurrentQuestionIndex] = useState(0);
   const [results, setResults] = useState(['']);
   const [finalResult, setfinalResult] = useState('');
@@ -31,7 +56,7 @@ const BalanceGame = () => {
       return acc;
     }, {});
 
-    const priorityOrder = ['감투', '집순', '욜로', '공부', 'N잡', '연애', '갓생', '인싸'];
+    const priorityOrder = ['감투', '집순', 'YOLO', '공부', 'N잡', '연애', '갓생', '인싸'];
 
     const maxCount = Math.max(...Object.values(resultCount));
 
@@ -47,49 +72,48 @@ const BalanceGame = () => {
       return aPriority - bPriority;
     });
 
-    console.log(results);
-
     setfinalResult(sortedKeys[0]);
   }, [results]);
+
+  useEffect(() => {
+    if (currentQuestionIndex === gameQuestions.length) {
+      sendGameResult({ user: 'unregistered', result: finalResult });
+      console.log('보냈음!', finalResult);
+    }
+  }, [currentQuestionIndex]);
 
   return (
     <>
       <h1 className='text-4xl font-bold mb-8'>대학 생활 밸런스 게임</h1>
 
-      {currentQuestionIndex < BalanceGameQuestions2.length && (
+      {currentQuestionIndex < gameQuestions.length && (
         <div className='flex flex-col items-center'>
           <h2 className='text-xl mb-16'>대학생활 첫 걸음! 수강 신청, 어떻게 할래?</h2>
           <div className='flex flex-col items-center'>
             <h2 className='text-md'>
-              {currentQuestionIndex + 1}/{BalanceGameQuestions2.length}
+              {currentQuestionIndex + 1}/{gameQuestions.length}
             </h2>
-            <h2 className='text-2xl mb-8'>{BalanceGameQuestions2[currentQuestionIndex].topic}</h2>
+            <h2 className='text-2xl mb-8'>{gameQuestions[currentQuestionIndex].topic}</h2>
             <div className='flex flex-col space-y-16'>
               <BalanceGameButton
-                label={BalanceGameQuestions2[currentQuestionIndex].selects.top.select}
+                label={gameQuestions[currentQuestionIndex].selects.top.select}
                 onClick={() => {
                   setcurrentQuestionIndex(currentQuestionIndex + 1);
-                  setResults([
-                    ...results,
-                    BalanceGameQuestions2[currentQuestionIndex].selects.top.type,
-                  ]);
+                  setResults([...results, gameQuestions[currentQuestionIndex].selects.top.type]);
                 }}
               />
               <BalanceGameButton
-                label={BalanceGameQuestions2[currentQuestionIndex].selects.bottom.select}
+                label={gameQuestions[currentQuestionIndex].selects.bottom.select}
                 onClick={() => {
                   setcurrentQuestionIndex(currentQuestionIndex + 1);
-                  setResults([
-                    ...results,
-                    BalanceGameQuestions2[currentQuestionIndex].selects.bottom.type,
-                  ]);
+                  setResults([...results, gameQuestions[currentQuestionIndex].selects.bottom.type]);
                 }}
               />
             </div>
           </div>
         </div>
       )}
-      {currentQuestionIndex === BalanceGameQuestions2.length && (
+      {currentQuestionIndex === gameQuestions.length && (
         <>
           <div className='flex flex-col items-center'>
             <h1 className='text-xl mb-8'>결과</h1>
