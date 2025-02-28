@@ -15,10 +15,10 @@ const Landing = () => {
           소개 페이지
         </Link>
         <Link
-          to='/quiz'
+          to='/balancegame'
           className='px-4 py-2 bg-[#FF0000] text-white rounded-lg hover:bg-[#CC0000] transition-colors'
         >
-          퀴즈 페이지
+          밸런스 게임
         </Link>
       </div>
       <div className='flex gap-4 pt-2'>

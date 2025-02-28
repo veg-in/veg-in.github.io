@@ -2,10 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import Landing from '@/pages/Landing';
 import About from '@/pages/About';
-import Quiz from '@/pages/Quiz';
+import BalanceGame from '@/pages/BalanceGame';
 import TestBE from '@/pages/TestBE';
 import TestQR from './pages/TestQR';
-import Result from '@/pages/Result';
 import AboutNext from '@/pages/AboutNext';
 
 function App() {
@@ -15,10 +14,9 @@ function App() {
         <Route element={<Layout />}>
           <Route path='/' element={<Landing />} />
           <Route path='/about' element={<About />} />
-          <Route path='/quiz' element={<Quiz />} />
+          <Route path='/balancegame' element={<BalanceGame />} />
           <Route path='/test-be' element={<TestBE />} />
           <Route path='/test-qr' element={<TestQR />} />
-          <Route path='/result' element={<Result />} />
           <Route path='/aboutnext' element={<AboutNext />} />
         </Route>
       </Routes>
