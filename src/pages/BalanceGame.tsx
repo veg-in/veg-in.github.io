@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { storage } from '@/lib/firebase';
-import { ref, getBlob, getDownloadURL } from 'firebase/storage';
-import { BalanceGameQuestions, BalanceGameQuestions2 } from '@/data/BalanceGame';
+import { ref, getDownloadURL } from 'firebase/storage';
+import { BalanceGameQuestions2 } from '@/data/BalanceGame';
 
 // 버튼 컴포넌트 분리
 interface BalanceGameButtonProps {
