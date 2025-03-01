@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { storage } from '@/lib/firebase';
+import { ref, getBlob, getDownloadURL } from 'firebase/storage';
 import { BalanceGameQuestions, BalanceGameQuestions2 } from '@/data/BalanceGame';
 
 // 버튼 컴포넌트 분리
@@ -47,6 +49,19 @@ const BalanceGame = () => {
   const [currentQuestionIndex, setcurrentQuestionIndex] = useState(0);
   const [results, setResults] = useState(['']);
   const [finalResult, setfinalResult] = useState('');
+
+  useEffect(() => {
+    const storageRef = ref(storage, 'yonsei.png');
+    console.log(storageRef);
+    const gb = async () => {
+      // const blob = await getBlob(storageRef);
+      // console.log(blob);
+      getDownloadURL(storageRef).then((url) => {
+        console.log(url); // 올바른 URL 출력됨
+      });
+    };
+    gb();
+  });
 
   useEffect(() => {
     const resultCount = results.reduce<Record<string, number>>((acc, item) => {
