@@ -13,7 +13,8 @@ export default function BalanceGame() {
   const gameQuestions = BalanceGameQuestions;
   const [results, setResults] = useState<string[]>([]);
   const [finalResult, setFinalResult] = useState('');
-  const [finalResultPercentage, setFinalResultPercentage] = useState('');
+  const [typePercentage, setTypePercentage] = useState('');
+  const [totalTypeCount, setTotalTypeCount] = useState(0);
 
   const handleChoiceButton = (choiceType: string) => {
     setResults((prev) => [...prev, choiceType]);
@@ -62,6 +63,7 @@ export default function BalanceGame() {
 
         if (response.ok) {
           const data = await response.json();
+          setTotalTypeCount(data.length);
           console.log('Response data:', data);
         } else {
           console.error('Failed to send data:', response.status);
@@ -69,7 +71,7 @@ export default function BalanceGame() {
 
         if (percentageResponse.ok) {
           const percentageData = await percentageResponse.json();
-          setFinalResultPercentage(percentageData.percentage);
+          setTypePercentage(percentageData.percentage);
           console.log('percent', percentageData.percentage);
         }
       } catch (error) {
@@ -89,7 +91,11 @@ export default function BalanceGame() {
       {results.length === gameQuestions.length ? (
         finalResult ? (
           /* 모든 질문에 답변을 마쳤다면 결과 표시 */
-          <ResultPage finalResult={finalResult} finalResultPercentage={finalResultPercentage} />
+          <ResultPage
+            finalResult={finalResult}
+            typePercentage={typePercentage}
+            totalTypeCount={totalTypeCount}
+          />
         ) : (
           /* 모든 질문 답변 ~ finalResult 나오는데 걸리는 사이 (React Hook 고려)*/
           <div>Loading Final Result..</div>
