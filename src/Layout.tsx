@@ -16,7 +16,7 @@ export default function Layout() {
           Home
         </Link>
         {/* tailwindCSS 안 먹힘 좀 찾아봐야 할 듯 */}
-        <ConnectButton connectText='Connect Wallet' />
+        <ConnectButton connectText='임시 Connect Wallet' />
       </div>
       <Outlet />
     </div>
