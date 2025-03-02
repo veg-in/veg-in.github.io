@@ -6,13 +6,14 @@ import ResultPage from './_ResultPage';
 interface BalanceGameResult {
   // id: string;
   user: string;
-  result: string;
+  resultType: string;
 }
 
 export default function BalanceGame() {
   const gameQuestions = BalanceGameQuestions;
   const [results, setResults] = useState<string[]>([]);
   const [finalResult, setFinalResult] = useState('');
+  const [finalResultPercentage, setFinalResultPercentage] = useState('');
 
   const handleChoiceButton = (choiceType: string) => {
     setResults((prev) => [...prev, choiceType]);
@@ -47,13 +48,17 @@ export default function BalanceGame() {
   }, [results]);
 
   useEffect(() => {
-    const sendGameResult = async ({ user, result }: BalanceGameResult) => {
+    const sendGameResult = async ({ user, resultType }: BalanceGameResult) => {
       try {
-        const response = await fetch('https://backend-60km.onrender.com/balancegame/results', {
+        const response = await fetch('https://backend-60km.onrender.com/api/balancegames/results', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ user, result }),
+          body: JSON.stringify({ user, resultType }),
         });
+
+        const percentageResponse = await fetch(
+          `https://backend-60km.onrender.com/api/balancegames/results/percentage?resultType=${finalResult}`,
+        );
 
         if (response.ok) {
           const data = await response.json();
@@ -61,12 +66,18 @@ export default function BalanceGame() {
         } else {
           console.error('Failed to send data:', response.status);
         }
+
+        if (percentageResponse.ok) {
+          const percentageData = await percentageResponse.json();
+          setFinalResultPercentage(percentageData.percentage);
+          console.log('percent', percentageData.percentage);
+        }
       } catch (error) {
         console.error('Error:', error);
       }
     };
     if (finalResult) {
-      sendGameResult({ user: 'unregistered', result: finalResult });
+      sendGameResult({ user: 'unregistered', resultType: finalResult });
       console.log('보냈음!', finalResult);
     }
   }, [finalResult]);
@@ -78,7 +89,7 @@ export default function BalanceGame() {
       {results.length === gameQuestions.length ? (
         finalResult ? (
           /* 모든 질문에 답변을 마쳤다면 결과 표시 */
-          <ResultPage finalResult={finalResult} />
+          <ResultPage finalResult={finalResult} finalResultPercentage={finalResultPercentage} />
         ) : (
           /* 모든 질문 답변 ~ finalResult 나오는데 걸리는 사이 (React Hook 고려)*/
           <div>Loading Final Result..</div>
