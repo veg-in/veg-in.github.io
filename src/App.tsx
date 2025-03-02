@@ -18,7 +18,13 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <SuiClientProvider networks={networkConfig} defaultNetwork='testnet_suiscan'>
-        <WalletProvider autoConnect>
+        <WalletProvider
+          autoConnect
+          stashedWallet={{
+            name: 'DOKPAMI2',
+            network: 'testnet',
+          }}
+        >
           <Routers />
         </WalletProvider>
       </SuiClientProvider>
