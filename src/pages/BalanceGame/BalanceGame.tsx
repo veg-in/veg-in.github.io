@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { storage } from '@/lib/firebase';
 import { ref, getDownloadURL } from 'firebase/storage';
-import { BalanceGameQuestions2 } from '@/data/BalanceGame';
+import { BalanceGameQuestions } from '@/data/BalanceGameQuestions';
 import { BalanceGameResults } from '@/data/BalanceGameResult';
 import BalanceGameButton from './_BalanceGameButton';
 
@@ -32,7 +32,7 @@ const sendGameResult = async ({ user, result }: BalanceGameResult) => {
 };
 
 export default function BalanceGame() {
-  const gameQuestions = BalanceGameQuestions2;
+  const gameQuestions = BalanceGameQuestions;
   const [currentQuestionIndex, setcurrentQuestionIndex] = useState(0);
   const [results, setResults] = useState<string[]>([]);
   const [finalResult, setFinalResult] = useState('');
