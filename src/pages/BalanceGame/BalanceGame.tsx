@@ -2,28 +2,12 @@ import { useEffect, useState } from 'react';
 import { storage } from '@/lib/firebase';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { BalanceGameQuestions2 } from '@/data/BalanceGame';
-
-// 버튼 컴포넌트 분리
-interface BalanceGameButtonProps {
-  label: string;
-  onClick: () => void;
-}
+import BalanceGameButton from './_BalanceGameButton';
 
 interface BalanceGameResult {
   user: string;
   result: string;
 }
-
-const BalanceGameButton = ({ label, onClick }: BalanceGameButtonProps) => {
-  return (
-    <button
-      className='cursor-pointer py-2 w-96 border-2 border-black bg-yellow-400 active:bg-yellow-700 rounded-lg'
-      onClick={onClick}
-    >
-      {label}
-    </button>
-  );
-};
 
 const sendGameResult = async ({ user, result }: BalanceGameResult) => {
   try {
@@ -44,7 +28,7 @@ const sendGameResult = async ({ user, result }: BalanceGameResult) => {
   }
 };
 
-const BalanceGame = () => {
+export default function BalanceGame() {
   const gameQuestions = BalanceGameQuestions2;
   const [currentQuestionIndex, setcurrentQuestionIndex] = useState(0);
   const [results, setResults] = useState(['']);
@@ -151,6 +135,4 @@ const BalanceGame = () => {
       )}
     </>
   );
-};
-
-export default BalanceGame;
+}
