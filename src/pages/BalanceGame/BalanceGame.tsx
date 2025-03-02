@@ -83,11 +83,11 @@ export default function BalanceGame() {
 
   return (
     <>
-      <h1 className='text-4xl font-bold mb-8'>대학 생활 밸런스 게임</h1>
+      <h1 className='text-2xl font-bold mb-8'>대학 생활 밸런스 게임</h1>
 
       {currentQuestionIndex < gameQuestions.length && (
         <div className='flex flex-col items-center'>
-          <h2 className='text-xl mb-16'>대학생활 첫 걸음! 수강 신청, 어떻게 할래?</h2>
+          <h2 className='text-lg mb-16'>대학생활 첫 걸음! 수강 신청, 어떻게 할래?</h2>
           <div className='flex flex-col items-center'>
             <h2 className='text-md'>
               {currentQuestionIndex + 1}/{gameQuestions.length}
@@ -115,7 +115,7 @@ export default function BalanceGame() {
       {currentQuestionIndex === gameQuestions.length && (
         <>
           <div className='flex flex-col items-center'>
-            <h1 className='text-xl mb-8'>결과</h1>
+            <h1 className='mb-8'>내가 고른 대학 생활은...</h1>
           </div>
           <img src='/result_dokpami.png' className='w-48 h-48 object-contain mb-4' />
           <div className='font-bold text-xl mb-5'>
