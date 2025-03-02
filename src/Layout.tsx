@@ -1,4 +1,5 @@
 import { Outlet, useLocation, Link } from 'react-router-dom';
+import { ConnectButton } from '@mysten/dapp-kit';
 
 export default function Layout() {
   const location = useLocation();
@@ -10,9 +11,13 @@ export default function Layout() {
         isSpecialPage ? 'bg-[#69B0EE]' : 'bg-[#88D0E5]'
       }`}
     >
-      <Link to='/' className='border-2 border-black p-2 m-2'>
-        Home
-      </Link>
+      <div className='w-full flex justify-between'>
+        <Link to='/' className='border-2 border-black p-2 m-2'>
+          Home
+        </Link>
+        {/* tailwindCSS 안 먹힘 좀 찾아봐야 할 듯 */}
+        <ConnectButton connectText='Connect Wallet' />
+      </div>
       <Outlet />
     </div>
   );
