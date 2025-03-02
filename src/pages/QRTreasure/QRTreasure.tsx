@@ -11,7 +11,7 @@ interface KakaoMapProps {
   latitude?: number;
   longitude?: number;
   level?: number;
-  locations: { title: string; lat: number; lng: number, checked: boolean }[];
+  locations: { title: string; lat: number; lng: number; checked: boolean }[];
   showAll: boolean;
   onMarkerClick: (title: string) => void; // 클릭 이벤트 전달
 }
@@ -22,7 +22,7 @@ declare global {
   }
 }
 
-export default function TestQR() {
+export default function QRTreasure() {
   const [locations, setLocations] = useState<Location[]>([
     { title: '전체 보기', lat: 37.56357067982097, lng: 126.93782429801615, checked: false },
     { title: '중도', lat: 37.563743700106016, lng: 126.93702902334138, checked: false },
@@ -36,11 +36,17 @@ export default function TestQR() {
   const [selectedLocation, setSelectedLocation] = useState(locations[0]);
 
   // 마커 클릭 시 해당 마커의 checked 값 업데이트
-  const handleMarkerClick = (title: string) => { // title 이름의 마커 받음
-    setLocations((prev) => // 상태를 업데이트, 반영
-      prev.map((location) => // ??
-        location.title === title ? { ...location, checked: true } : location
-      )
+  const handleMarkerClick = (title: string) => {
+    // title 이름의 마커 받음
+    setLocations(
+      (
+        prev, // 상태를 업데이트, 반영
+      ) =>
+        prev.map(
+          (
+            location, // ??
+          ) => (location.title === title ? { ...location, checked: true } : location),
+        ),
     );
   };
 
@@ -155,117 +161,115 @@ function KakaoMap({
     //   mapInstance.current.setCenter(new window.kakao.maps.LatLng(latitude, longitude));
     // }
 
-  try {
-    console.log('지도 객체 생성 시작');
-    const options = {
-      center: new window.kakao.maps.LatLng(latitude, longitude),
-      level: level,
-    };
-
-    const map = new window.kakao.maps.Map(mapRef.current, options);
-    console.log('지도 생성됨');
-
-    const markerImgSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-    const checkedMarkerImgSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png"; // 선택된 마커 이미지
-    const normalSize = new window.kakao.maps.Size(24, 35); // 기본 마커 사이즈   
-    const hoverSize = new window.kakao.maps.Size(29, 40); // 마우스 오버시 마커 사이즈
-    const checkedSize = new window.kakao.maps.Size(35, 38); // 마우스 오버시 마커 사이즈
-
-    const normalMarkerImg = new window.kakao.maps.MarkerImage(markerImgSrc, normalSize); // 기본 마커 이미지를 생성
-    const hoverMarkerImg = new window.kakao.maps.MarkerImage(markerImgSrc, hoverSize); // 기본 마커 이미지를 생성
-    const checkedMarkerImg = new window.kakao.maps.MarkerImage(checkedMarkerImgSrc, checkedSize); // 클릭 시 이미지
-
-    if (showAll) {
-      // "전체 보기" 클릭하면 모든 마커 표시
-      const bounds = new window.kakao.maps.LatLngBounds(); // 여러 개 좌표를 포함하는 경계 상자 생성
-
-      let map = new window.kakao.maps.Map(mapRef.current, {
+    try {
+      console.log('지도 객체 생성 시작');
+      const options = {
         center: new window.kakao.maps.LatLng(latitude, longitude),
-        level,
-      });
+        level: level,
+      };
 
-      locations.forEach((location) => {
-        const markerPosition = new window.kakao.maps.LatLng(location.lat, location.lng);
-        const marker = new window.kakao.maps.Marker({
-          position: markerPosition,
-          image: location.checked ? checkedMarkerImg : normalMarkerImg,
+      const map = new window.kakao.maps.Map(mapRef.current, options);
+      console.log('지도 생성됨');
+
+      const markerImgSrc =
+        'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png';
+      const checkedMarkerImgSrc =
+        'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png'; // 선택된 마커 이미지
+      const normalSize = new window.kakao.maps.Size(24, 35); // 기본 마커 사이즈
+      const hoverSize = new window.kakao.maps.Size(29, 40); // 마우스 오버시 마커 사이즈
+      const checkedSize = new window.kakao.maps.Size(35, 38); // 마우스 오버시 마커 사이즈
+
+      const normalMarkerImg = new window.kakao.maps.MarkerImage(markerImgSrc, normalSize); // 기본 마커 이미지를 생성
+      const hoverMarkerImg = new window.kakao.maps.MarkerImage(markerImgSrc, hoverSize); // 기본 마커 이미지를 생성
+      const checkedMarkerImg = new window.kakao.maps.MarkerImage(checkedMarkerImgSrc, checkedSize); // 클릭 시 이미지
+
+      if (showAll) {
+        // "전체 보기" 클릭하면 모든 마커 표시
+        const bounds = new window.kakao.maps.LatLngBounds(); // 여러 개 좌표를 포함하는 경계 상자 생성
+
+        let map = new window.kakao.maps.Map(mapRef.current, {
+          center: new window.kakao.maps.LatLng(latitude, longitude),
+          level,
         });
 
-        marker.setMap(map);
-        bounds.extend(markerPosition); // 모든 마커가 지도 안에 들어오도록
+        locations.forEach((location) => {
+          const markerPosition = new window.kakao.maps.LatLng(location.lat, location.lng);
+          const marker = new window.kakao.maps.Marker({
+            position: markerPosition,
+            image: location.checked ? checkedMarkerImg : normalMarkerImg,
+          });
+
+          marker.setMap(map);
+          bounds.extend(markerPosition); // 모든 마커가 지도 안에 들어오도록
+
+          window.kakao.maps.event.addListener(marker, 'mouseover', () => {
+            if (!location.checked) marker.setImage(hoverMarkerImg); // 체크된 마커 제외하고
+          });
+
+          window.kakao.maps.event.addListener(marker, 'mouseout', () => {
+            if (!location.checked) marker.setImage(normalMarkerImg);
+          });
+
+          window.kakao.maps.event.addListener(marker, 'click', () => {
+            if (!location.checked) {
+              onMarkerClick(location.title); // 클릭하면 checked=true로 변경
+              marker.setImage(checkedMarkerImg); // 빨간 마커로 변경
+            }
+          });
+        });
+
+        map.setBounds(bounds); // 지도 크기 자동 조정
+        console.log('모든 마커 추가됨');
+      } else {
+        // 장소 선택 시, 마커 하나 표시
+        const selectedLoc = locations.find((loc) => loc.lat === latitude && loc.lng === longitude); // 해당 위치를 selectedLoc으로 받기
+        if (!selectedLoc) return;
+
+        const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
+        const marker = new window.kakao.maps.Marker({
+          position: markerPosition,
+          image: selectedLoc.checked ? checkedMarkerImg : normalMarkerImg,
+        });
 
         window.kakao.maps.event.addListener(marker, 'mouseover', () => {
-          if (!location.checked) marker.setImage(hoverMarkerImg); // 체크된 마커 제외하고
+          if (!selectedLoc.checked) marker.setImage(hoverMarkerImg); // 체크된 마커 제외하고
         });
 
         window.kakao.maps.event.addListener(marker, 'mouseout', () => {
-          if (!location.checked) marker.setImage(normalMarkerImg);
+          if (!selectedLoc.checked) marker.setImage(normalMarkerImg);
         });
 
         window.kakao.maps.event.addListener(marker, 'click', () => {
-          if (!location.checked) {
-            onMarkerClick(location.title); // 클릭하면 checked=true로 변경
+          if (!selectedLoc.checked) {
+            onMarkerClick(selectedLoc.title); // 클릭하면 checked=true로 변경
             marker.setImage(checkedMarkerImg); // 빨간 마커로 변경
           }
         });
-
-
-      });
-
-      map.setBounds(bounds); // 지도 크기 자동 조정
-      console.log('모든 마커 추가됨');
-    } else {
-      // 장소 선택 시, 마커 하나 표시
-      const selectedLoc = locations.find((loc) => loc.lat === latitude && loc.lng === longitude); // 해당 위치를 selectedLoc으로 받기
-      if (!selectedLoc) return;
-
-      const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
-      const marker = new window.kakao.maps.Marker({
-        position: markerPosition,
-        image: selectedLoc.checked ? checkedMarkerImg : normalMarkerImg
-      });
-
-      window.kakao.maps.event.addListener(marker, 'mouseover', () => {
-        if (!selectedLoc.checked) marker.setImage(hoverMarkerImg); // 체크된 마커 제외하고
-      });
-
-      window.kakao.maps.event.addListener(marker, 'mouseout', () => {
-        if (!selectedLoc.checked) marker.setImage(normalMarkerImg);
-      });
-
-      window.kakao.maps.event.addListener(marker, 'click', () => {
-        if (!selectedLoc.checked) {
-          onMarkerClick(selectedLoc.title); // 클릭하면 checked=true로 변경
-          marker.setImage(checkedMarkerImg); // 빨간 마커로 변경
-        }
-      });
-      marker.setMap(map);
-      console.log('단일 마커 추가됨');
+        marker.setMap(map);
+        console.log('단일 마커 추가됨');
+      }
+      // 지도 크기 조정 이벤트 발생
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+      }, 100);
+    } catch (e) {
+      console.error('지도 초기화 오류:', e);
+      setError('지도를 표시하는데 실패했습니다');
     }
-    // 지도 크기 조정 이벤트 발생
-    setTimeout(() => {
-      window.dispatchEvent(new Event('resize'))
-    }, 100);
-  } catch (e) {
-    console.error('지도 초기화 오류:', e);
-    setError('지도를 표시하는데 실패했습니다');
-  }
-}, [latitude, longitude, level, isScriptLoaded, locations, showAll]);
+  }, [latitude, longitude, level, isScriptLoaded, locations, showAll]);
 
-
-
-return (
-  <div className='w-full'>
-    {error ? (
-      <div className='text-red-500 text-center py-4'>{error}</div>
-    ) : !isScriptLoaded ? (
-      <div className='text-center py-4'>지도를 불러오는 중...</div>
-    ) : null}
-    <div
-      ref={mapRef}
-      style={{ width, height, display: error ? 'none' : 'block' }}
-      className='border rounded-lg'
-    />
-  </div>
-);
+  return (
+    <div className='w-full'>
+      {error ? (
+        <div className='text-red-500 text-center py-4'>{error}</div>
+      ) : !isScriptLoaded ? (
+        <div className='text-center py-4'>지도를 불러오는 중...</div>
+      ) : null}
+      <div
+        ref={mapRef}
+        style={{ width, height, display: error ? 'none' : 'block' }}
+        className='border rounded-lg'
+      />
+    </div>
+  );
 }

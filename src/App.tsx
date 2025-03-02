@@ -1,23 +1,38 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from '@/components/Layout';
-import Landing from '@/pages/Landing';
-import About from '@/pages/About';
-import BalanceGame from '@/pages/BalanceGame';
+import Landing from '@/pages/Landing/Landing';
+import About from '@/pages/Landing/About';
+import BalanceGame from '@/pages/BalanceGame/BalanceGame';
 import TestBE from '@/pages/TestBE';
-import TestQR from './pages/TestQR';
-import AboutNext from '@/pages/AboutNext';
+import QRTreasure from './pages/QRTreasure/QRTreasure';
+import AboutNext from '@/pages/Landing/AboutNext';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route element={<Layout />}>
-          <Route path='/' element={<Landing />} />
+        <Route path='/' element={<Layout />}>
+          <Route index element={<Landing />} />
+          {/* TODO : About이 Landing 으로 바뀌어서 /(root) 경로로 가고, */}
           <Route path='/about' element={<About />} />
-          <Route path='/balancegame' element={<BalanceGame />} />
-          <Route path='/test-be' element={<TestBE />} />
-          <Route path='/test-qr' element={<TestQR />} />
+          {/* TODO : AboutNext가 About으로 바뀌어서 /about으로 가야 함 */}
           <Route path='/aboutnext' element={<AboutNext />} />
+
+          {/* Balane Game Path */}
+          <Route path='/balancegame'>
+            <Route index element={<BalanceGame />} />
+          </Route>
+
+          {/* QR Treasure Path */}
+          <Route path='/qrtreasure'>
+            <Route index element={<QRTreasure />} />
+          </Route>
+
+          <Route path='/test-be' element={<TestBE />} />
+
+          {/* 404 Not Found */}
+          <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>
     </Router>

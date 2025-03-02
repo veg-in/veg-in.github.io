@@ -16,7 +16,7 @@ export default function AboutNext() {
           연대생 변신 시작! 너의 선택은?
         </button>
       </Link>
-      <Link to='/testqr'>
+      <Link to='/qrtreasure'>
         <button className='absolute bottom-8 left-1/2 w-76 h-14 transform -translate-x-1/2 bg-[#FFCE00] border-2 border-black rounded hover:bg-blue-500 text-lg font-bold'>
           동아리 박람회 이벤트 참여하기
         </button>
