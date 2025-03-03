@@ -82,7 +82,7 @@ export default function QRAdmin() {
       <h1 className='text-3xl font-bold mb-6'>QR 코드 보물찾기 URL 목록</h1>
 
       <div className='mb-8'>
-        <p className='mb-4'>각 위치에 대한 URL을 외부 QR 코드 생성 사이트에서 사용하세요.</p>
+        <p className='mb-4'>자유롭게 테스트해보세요~</p>
         <button
           onClick={resetAllQRData}
           className='bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded'
@@ -101,9 +101,6 @@ export default function QRAdmin() {
             <div>
               <p className='font-bold mb-2'>QR 코드에 사용할 URL:</p>
               <div className='bg-gray-100 p-3 rounded break-all'>{generateQRUrl(location)}</div>
-              <p className='text-sm mt-2 text-gray-600'>
-                위 URL을 외부 QR 코드 생성기에 입력하여 QR 코드를 생성하세요.
-              </p>
             </div>
           </div>
         ))}
