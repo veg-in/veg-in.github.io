@@ -5,6 +5,7 @@ import About from '@/pages/Landing/About';
 import BalanceGame from '@/pages/BalanceGame/BalanceGame';
 import TestBE from '@/pages/TestBE';
 import QRTreasure from './pages/QRTreasure/QRTreasure';
+import QRResult from './pages/QRTreasure/QRResult'; // 새로 추가한 결과 페이지
 import AboutNext from '@/pages/Landing/AboutNext';
 import NotFound from './pages/NotFound';
 
@@ -27,6 +28,7 @@ export default function Routers() {
           {/* QR Treasure Path */}
           <Route path='/qrtreasure'>
             <Route index element={<QRTreasure />} />
+            <Route path='result' element={<QRResult />} />
           </Route>
 
           <Route path='/test-be' element={<TestBE />} />
