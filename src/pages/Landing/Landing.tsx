@@ -33,6 +33,12 @@ const Landing = () => {
           QR 보물찾기
         </Link>
         <Link
+          to='/qrtreasure/admin'
+          className='px-4 py-2 bg-[#0088ff] text-white rounded-lg hover:bg-[#0077ff] transition-colors'
+        >
+          QR 보물찾기 테스트
+        </Link>
+        <Link
           to='/test-be'
           className='px-4 py-2 bg-[#000000] text-white rounded-lg hover:bg-[#333333] transition-colors'
         >
