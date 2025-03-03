@@ -2,19 +2,12 @@ import { useEffect, useState } from 'react';
 import { BalanceGameQuestions } from '@/data/BalanceGameQuestions';
 import BalanceChoiceButton from './_BalanceChoiceButton';
 import ResultPage from './_ResultPage';
-
-interface BalanceGameResult {
-  // id: string;
-  user: string;
-  resultType: string;
-}
+import { sendGameResult } from './api';
 
 export default function BalanceGame() {
   const gameQuestions = BalanceGameQuestions;
   const [results, setResults] = useState<string[]>([]);
   const [finalResult, setFinalResult] = useState('');
-  const [typePercentage, setTypePercentage] = useState('');
-  const [totalTypeCount, setTotalTypeCount] = useState(0);
 
   const handleChoiceButton = (choiceType: string) => {
     setResults((prev) => [...prev, choiceType]);
@@ -44,45 +37,12 @@ export default function BalanceGame() {
         return aTypePriority - bTypePriority;
       });
 
-      setFinalResult(resultsWithMaxCount[0]);
-    }
-  }, [results]);
-
-  useEffect(() => {
-    const sendGameResult = async ({ user, resultType }: BalanceGameResult) => {
-      try {
-        const response = await fetch('https://backend-60km.onrender.com/api/balancegames/results', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ user, resultType }),
-        });
-
-        const percentageResponse = await fetch(
-          `https://backend-60km.onrender.com/api/balancegames/results/percentage?resultType=${finalResult}`,
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          setTotalTypeCount(data.length);
-          console.log('Response data:', data);
-        } else {
-          console.error('Failed to send data:', response.status);
-        }
-
-        if (percentageResponse.ok) {
-          const percentageData = await percentageResponse.json();
-          setTypePercentage(percentageData.percentage);
-          console.log('percent', percentageData.percentage);
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-    if (finalResult) {
-      sendGameResult({ user: 'unregistered', resultType: finalResult });
+      sendGameResult({ user: 'unregistered', resultType: resultsWithMaxCount[0] }).then(() => {
+        setFinalResult(resultsWithMaxCount[0]);
+      });
       console.log('보냈음!', finalResult);
     }
-  }, [finalResult]);
+  }, [results]);
 
   return (
     <>
@@ -91,11 +51,7 @@ export default function BalanceGame() {
       {results.length === gameQuestions.length ? (
         finalResult ? (
           /* 모든 질문에 답변을 마쳤다면 결과 표시 */
-          <ResultPage
-            finalResult={finalResult}
-            typePercentage={typePercentage}
-            totalTypeCount={totalTypeCount}
-          />
+          <ResultPage finalResult={finalResult} />
         ) : (
           /* 모든 질문 답변 ~ finalResult 나오는데 걸리는 사이 (React Hook 고려)*/
           <div>Loading Final Result..</div>

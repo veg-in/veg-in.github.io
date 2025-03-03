@@ -1,18 +1,28 @@
 import { BalanceGameResults } from '@/data/BalanceGameResult';
+import { useEffect, useState } from 'react';
+import { getTotalTypeCount, getTypePercentage } from './api';
 
 interface ResultPageProps {
   finalResult: string;
-  typePercentage: string;
-  totalTypeCount: number;
 }
-export default function ResultPage({
-  finalResult,
-  typePercentage,
-  totalTypeCount,
-}: ResultPageProps) {
+export default function ResultPage({ finalResult }: ResultPageProps) {
+  const [totalTypeCount, setTotalTypeCount] = useState(0);
+  const [typePercentage, setTypePercentage] = useState('');
+
   const resultInfo = BalanceGameResults[finalResult];
 
   if (!resultInfo) return <div>결과를 찾을 수 없습니다.</div>;
+
+  useEffect(() => {
+    const getResultData = async ({ finalResult }: { finalResult: string }) => {
+      const { totalTypeCount } = await getTotalTypeCount();
+      const { typePercentage } = await getTypePercentage({ finalResult });
+
+      setTotalTypeCount(totalTypeCount);
+      setTypePercentage(typePercentage);
+    };
+    getResultData({ finalResult });
+  }, [finalResult]);
 
   return (
     <>
@@ -30,7 +40,10 @@ export default function ResultPage({
         @dokpami.nft를 팔로우한 후 <br /> 태그해서 인스타 스토리를 올리면 oo을 받을 수 있어!
       </div>
       <div className='mb-10 text-sm font-bold'>인스타 스토리 이벤트 참여하기</div>
-      <button className='mb-8 font-bold text-sm bg-white border-2 border-black rounded px-3 py-2 hover:bg-blue-600'>
+      <button
+        className='mb-8 font-bold text-sm bg-white border-2 border-black rounded px-3 py-2 hover:bg-blue-600'
+        onClick={() => {}}
+      >
         Google Login하고 더 많은 이벤트 참여하기
       </button>
       <div className='text-sm font-bold'>BlockBlock x DOKPAMI</div>
