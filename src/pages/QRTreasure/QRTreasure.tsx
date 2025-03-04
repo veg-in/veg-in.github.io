@@ -79,6 +79,7 @@ export default function QRTreasure() {
 
   const [selectedLocation, setSelectedLocation] = useState(locations[0]);
   const [foundCount, setFoundCount] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
   const totalMarkers = locations.length - 1; // "전체 보기" 제외
 
   // 로컬 스토리지에서 발견한 마커 정보 로딩
@@ -122,33 +123,19 @@ export default function QRTreasure() {
   };
 
   return (
-    <div className='flex flex-col max-w-4xl mx-auto'>
+    <div className='flex flex-col max-w-4xl mx-auto '>
       {/* 공통 헤더 - 뒤로가기 버튼 활성화 */}
       <QRHeader showBackButton={true} backTo='/qrtreasure' />
 
-      <div className='p-4'>
-        <div className='mb-4 bg-blue-100 p-4 rounded-lg'>
-          <p className='font-semibold'>
-            찾은 마커: {foundCount}/{totalMarkers}
-          </p>
-          <div className='w-full bg-gray-300 h-4 rounded-full mt-2'>
-            <div
-              className='bg-blue-500 h-4 rounded-full'
-              style={{ width: `${(foundCount / totalMarkers) * 100}%` }}
-            ></div>
-          </div>
-        </div>
-
+      <div className='pt-[80px]'>
         <div className='mb-4'>
-          <h2 className='text-xl font-semibold mb-2'>위치 선택</h2>
+          <h2 className='text-xl font-semibold mb-2'>보물 위치 찾기</h2>
           <div className='flex flex-wrap gap-2'>
             {locations.map((location, index) => (
               <button
                 key={index}
-                className={`px-4 py-2 rounded flex items-center ${
-                  selectedLocation.title === location.title
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-gray-200'
+                className={`px-4 py-2 rounded flex items-center font-semibold ${
+                  selectedLocation.title === location.title ? 'bg-blue-500 text-white' : 'bg-white'
                 } ${location.checked ? 'border-2 border-red-500' : ''}`}
                 onClick={() => setSelectedLocation(location)}
               >
@@ -172,33 +159,55 @@ export default function QRTreasure() {
           />
         </div>
 
-        <div className='mt-4 p-4 bg-gray-100 rounded-lg'>
-          <h3 className='font-semibold text-lg mb-2'>장소 정보</h3>
-          {selectedLocation.title !== '전체 보기' ? (
+        <div className='mt-4 flex rounded-lg'>
+          <img src='/src/assets/profile.png' alt='profile' className='w-1/5 h-fit' />
+          <div className='w-full bg-white ml-3 p-2 rounded-xl'>
+            {selectedLocation.title !== '전체 보기' ? (
+              <>
+                <p className='text-xl font-bold mb-2'>{selectedLocation.title}</p>
+                <p className='mb-3'>{selectedLocation.description || '설명이 없습니다.'}</p>
+                <div className='text-sm'>
+                  <div>
+                    {selectedLocation.id && (
+                      <p>
+                        <strong>발견 여부:</strong>{' '}
+                        {selectedLocation.checked ? '발견함 ✓' : '아직 발견하지 않음'}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <p>지도에서 위치를 선택하거나 마커를 클릭하면 해당 장소의 정보가 표시됩니다.</p>
+            )}
+          </div>
+        </div>
+
+        <div className='mt-4 border-2 p-4 rounded-xl w-full bg-[#FFFDF2]'>
+          <div className='flex justify-between'>
+            <h3 className='text-[18px] font-bold'>이벤트 참여 방법 알아보기</h3>
+            <button onClick={() => setIsOpen(!isOpen)}>더보기</button>
+          </div>
+          {isOpen ? (
             <>
-              <p className='text-xl font-bold mb-2'>{selectedLocation.title}</p>
-              <p className='mb-3'>{selectedLocation.description || '설명이 없습니다.'}</p>
-              <div className='grid grid-cols-2 gap-2 text-sm'>
-                <div>
-                  <p>
-                    <strong>위도:</strong> {selectedLocation.lat}
-                  </p>
-                  <p>
-                    <strong>경도:</strong> {selectedLocation.lng}
-                  </p>
-                </div>
-                <div>
-                  {selectedLocation.id && (
-                    <p>
-                      <strong>발견 여부:</strong>{' '}
-                      {selectedLocation.checked ? '발견함 ✓' : '아직 발견하지 않음'}
-                    </p>
-                  )}
-                </div>
+              <br />
+              <div className='text-[14px] text-[#191F28] font-regular'>
+                <p className='text-[16px] font-bold underline'>이벤트 참여 방법</p>
+                <p>1. 📍 지도에서 위치 마크 보고 QR코드 찾기</p>
+                <p>2. 📸 카메라로 QR코드 스캔하기</p>
+                <p>3. 📲 공유하기 버튼을 통해 인스타에 공유하고 @dokpami.nft 태그하기</p>
+                <p>4. 🔍 다음 QR코드를 찾아 더 나은 선물 받기</p>
+              </div>
+              <br />
+              <div className='text-[14px] text-[#191F28] font-regula'>
+                <p className='text-[16px] font-bold underline'>상품 안내</p>
+                <p>· 6개 QR코드 중 1개 이상 스캔 시 🥛바나나우유 10명 (추첨)</p>
+                <p>· 6개 QR코드 중 3개 이상 스캔 시 ☕스타벅스 커피 3명 (추첨)</p>
+                <p>· 6개 QR코드 모두 스캔 시 🏆선착순 1명에게 스탠리 텀블러 지급</p>
               </div>
             </>
           ) : (
-            <p>지도에서 위치를 선택하거나 마커를 클릭하면 해당 장소의 정보가 표시됩니다.</p>
+            <></>
           )}
         </div>
       </div>

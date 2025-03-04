@@ -3,36 +3,24 @@ import QRHeader from './_QRHeader';
 
 export default function QRLanding() {
   return (
-    <div className='relative flex flex-col items-center w-full'>
+    <div className='flex flex-col justify-between w-full h-screen bg-[url(@/assets/background.png)] bg-center bg-cover'>
       {/* 공통 헤더 */}
       <QRHeader />
 
-      {/* 배경 요소 - 건물 실루엣 */}
-      <div
-        className='absolute bottom-0 w-full h-2/3 z-0 opacity-20'
-        style={{
-          backgroundImage: 'url("@/src/background.png")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center bottom',
-          backgroundRepeat: 'no-repeat',
-        }}
-      ></div>
-
       {/* 메인 콘텐츠 */}
-      <div className='z-10 flex-grow flex flex-col items-center justify-center px-6 pt-8 pb-32 md:pb-40'>
-        <div className='text-center mb-8'>
-          <h1
-            className='text-4xl font-Title  md:text-5xl font-bold mb-12 text-blue-500'
-            style={{
-              textShadow:
-                '3px 3px 3px white, -3px -3px -3px white, 3px -3px 3px white, -3px 3px -3px white',
-            }}
-          >
-            팜쭈의 보물을 찾아라!
-          </h1>
-
+      <div className='z-10 flex-grow flex flex-col items-center justify-evenly px-6 '>
+        <h1
+          className='text-4xl font-Title md:text-5xl font-bold text-blue-500'
+          style={{
+            textShadow:
+              '3px 3px 3px white, -3px -3px -3px white, 3px -3px 3px white, -3px 3px -3px white',
+          }}
+        >
+          팜쭈의 보물을 찾아라!
+        </h1>
+        <div className='text-center'>
           <div className='bg-blue-50 bg-opacity-70 rounded-xl px-6 py-4 shadow-md max-w-md mx-auto'>
-            <p className='text-lg md:text-xl text-center'>
+            <p className='text-sm md:text-lg text-center font-bold'>
               동아리 박람회 곳곳에 숨겨진 QR 코드를 찾고
               <br />
               특별한 개강 선물 받아볼래?
@@ -41,14 +29,10 @@ export default function QRLanding() {
         </div>
 
         {/* 시작하기 버튼 */}
-        <div className='mt-6 w-full flex justify-center'>
+        <div className='w-full mx-auto flex justify-center'>
           <Link
             to='/qrtreasure/map'
-            className='bg-blue-500 text-white text-2xl md:text-3xl font-bold py-4 px-12 rounded-full shadow-lg hover:bg-blue-600 transition duration-300 ease-in-out'
-            style={{
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
-              border: '2px solid white',
-            }}
+            className='w-3/4 text-center bg-white/75 text-[#0080FF] border-[3px] border-[#0080FF] text-2xl md:text-3xl font-bold py-4 px-12 rounded-full shadow-lg hover:bg-blue-600 transition duration-300 ease-in-out'
           >
             시작하기
           </Link>
@@ -56,11 +40,11 @@ export default function QRLanding() {
       </div>
 
       {/* 하단 캐릭터 */}
-      <div className='absolute bottom-0 z-20 w-full flex justify-center'>
+      <div className='z-20 w-full flex justify-center'>
         <img
-          src='/character.png'
+          src='src/assets/pamzzoo_QR.png'
           alt='캐릭터'
-          className='w-48 md:w-56 h-auto'
+          className='w-full h-auto'
           style={{
             filter: 'drop-shadow(0 -5px 10px rgba(0, 0, 0, 0.1))',
           }}
