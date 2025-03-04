@@ -79,13 +79,13 @@ export default function QRAdmin() {
 
   return (
     <div className='max-w-4xl mx-auto p-6'>
-      <h1 className='text-3xl font-bold mb-6'>QR 코드 보물찾기 URL 목록</h1>
+      <h1 className='text-3xl font-bold mb-6 font-Title'>QR 코드 보물찾기 URL 목록</h1>
 
       <div className='mb-8'>
         <p className='mb-4'>자유롭게 테스트해보세요~</p>
         <button
           onClick={resetAllQRData}
-          className='bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded'
+          className='bg-red-500 hover:bg-red-600 text-white font-Jua font-bold py-2 px-4 rounded'
         >
           모든 발견 데이터 초기화
         </button>
