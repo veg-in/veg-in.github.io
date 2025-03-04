@@ -7,8 +7,8 @@ export default function QRResult() {
   const navigate = useNavigate();
   const location = useLocation();
   const [foundMarkers, setFoundMarkers] = useState(0);
-  const [totalMarkers, setTotalMarkers] = useState(0);
-  const [markerName, setMarkerName] = useState('');
+  const [, setTotalMarkers] = useState(0);
+  const [, setMarkerName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

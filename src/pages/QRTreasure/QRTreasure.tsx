@@ -78,9 +78,9 @@ export default function QRTreasure() {
   ]);
 
   const [selectedLocation, setSelectedLocation] = useState(locations[0]);
-  const [foundCount, setFoundCount] = useState(0);
+  const [, setFoundCount] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
-  const totalMarkers = locations.length - 1; // "전체 보기" 제외
+  // const totalMarkers = locations.length - 1; // "전체 보기" 제외
 
   // 로컬 스토리지에서 발견한 마커 정보 로딩
   useEffect(() => {
