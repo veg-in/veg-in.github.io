@@ -17,7 +17,7 @@ export default function About() {
 
   useEffect(() => {
     if (animationComplete) {
-      navigate('/AboutNext'); // 애니메이션 완료 후 라우팅
+      navigate('/aboutnext'); // 애니메이션 완료 후 라우팅
     }
   }, [animationComplete, navigate]);
 
