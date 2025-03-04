@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const Landing = () => {
   return (
     <>
-      <div className='flex gap-8 mb-12 mt-8'>
+      <div className='flex gap-8 mb-12 mt-8 '>
         <div className='text-7xl'>🦅</div>
       </div>
       <h1 className='text-4xl font-bold mb-8'>DOKPAMI</h1>
