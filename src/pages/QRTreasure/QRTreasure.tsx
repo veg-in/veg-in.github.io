@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import KakaoMap from './_KakaoMap';
+import QRHeader from './_QRHeader';
 
 interface Location {
   title: string;
   lat: number;
   lng: number;
   checked: boolean;
-  id?: string; // 마커 ID 추가 (QR 코드용)
-  hash?: string; // 해시값 추가 (QR 코드 검증용)
-  description?: string; // 장소 설명 추가
+  id?: string;
+  hash?: string;
+  description?: string;
 }
 
 declare global {
@@ -112,7 +113,7 @@ export default function QRTreasure() {
     loadFoundMarkers();
   }, []);
 
-  // 마커 클릭 시 해당 장소 정보 표시 (마커 체크 기능은 제거)
+  // 마커 클릭 시 해당 장소 정보 표시
   const handleMarkerClick = (title: string) => {
     const location = locations.find((loc) => loc.title === title);
     if (location) {
@@ -121,80 +122,85 @@ export default function QRTreasure() {
   };
 
   return (
-    <div className='max-w-4xl mx-auto p-4'>
-      <h1 className='text-2xl font-bold mb-6'>QR 보물찾기</h1>
+    <div className='flex flex-col max-w-4xl mx-auto'>
+      {/* 공통 헤더 - 뒤로가기 버튼 활성화 */}
+      <QRHeader showBackButton={true} backTo='/qrtreasure' />
 
-      <div className='mb-4 bg-blue-100 p-4 rounded-lg'>
-        <p className='font-semibold'>
-          찾은 마커: {foundCount}/{totalMarkers}
-        </p>
-        <div className='w-full bg-gray-300 h-4 rounded-full mt-2'>
-          <div
-            className='bg-blue-500 h-4 rounded-full'
-            style={{ width: `${(foundCount / totalMarkers) * 100}%` }}
-          ></div>
+      <div className='p-4'>
+        <div className='mb-4 bg-blue-100 p-4 rounded-lg'>
+          <p className='font-semibold'>
+            찾은 마커: {foundCount}/{totalMarkers}
+          </p>
+          <div className='w-full bg-gray-300 h-4 rounded-full mt-2'>
+            <div
+              className='bg-blue-500 h-4 rounded-full'
+              style={{ width: `${(foundCount / totalMarkers) * 100}%` }}
+            ></div>
+          </div>
         </div>
-      </div>
 
-      <div className='mb-4'>
-        <h2 className='text-xl font-semibold mb-2'>위치 선택</h2>
-        <div className='flex flex-wrap gap-2'>
-          {locations.map((location, index) => (
-            <button
-              key={index}
-              className={`px-4 py-2 rounded flex items-center ${
-                selectedLocation.title === location.title ? 'bg-blue-500 text-white' : 'bg-gray-200'
-              } ${location.checked ? 'border-2 border-red-500' : ''}`}
-              onClick={() => setSelectedLocation(location)}
-            >
-              {location.title}
-              {location.checked && <span className='ml-2 text-red-500'>✓</span>}
-            </button>
-          ))}
+        <div className='mb-4'>
+          <h2 className='text-xl font-semibold mb-2'>위치 선택</h2>
+          <div className='flex flex-wrap gap-2'>
+            {locations.map((location, index) => (
+              <button
+                key={index}
+                className={`px-4 py-2 rounded flex items-center ${
+                  selectedLocation.title === location.title
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-gray-200'
+                } ${location.checked ? 'border-2 border-red-500' : ''}`}
+                onClick={() => setSelectedLocation(location)}
+              >
+                {location.title}
+                {location.checked && <span className='ml-2 text-red-500'>✓</span>}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className='rounded-lg overflow-hidden border border-gray-300'>
-        <KakaoMap
-          width='100%'
-          height='400px'
-          latitude={selectedLocation.lat}
-          longitude={selectedLocation.lng}
-          level={3}
-          locations={locations}
-          showAll={selectedLocation.title === '전체 보기'}
-          onMarkerClick={handleMarkerClick}
-        />
-      </div>
+        <div className='rounded-lg overflow-hidden border border-gray-300'>
+          <KakaoMap
+            width='100%'
+            height='400px'
+            latitude={selectedLocation.lat}
+            longitude={selectedLocation.lng}
+            level={3}
+            locations={locations}
+            showAll={selectedLocation.title === '전체 보기'}
+            onMarkerClick={handleMarkerClick}
+          />
+        </div>
 
-      <div className='mt-4 p-4 bg-gray-100 rounded-lg'>
-        <h3 className='font-semibold text-lg mb-2'>장소 정보</h3>
-        {selectedLocation.title !== '전체 보기' ? (
-          <>
-            <p className='text-xl font-bold mb-2'>{selectedLocation.title}</p>
-            <p className='mb-3'>{selectedLocation.description || '설명이 없습니다.'}</p>
-            <div className='grid grid-cols-2 gap-2 text-sm'>
-              <div>
-                <p>
-                  <strong>위도:</strong> {selectedLocation.lat}
-                </p>
-                <p>
-                  <strong>경도:</strong> {selectedLocation.lng}
-                </p>
-              </div>
-              <div>
-                {selectedLocation.id && (
+        <div className='mt-4 p-4 bg-gray-100 rounded-lg'>
+          <h3 className='font-semibold text-lg mb-2'>장소 정보</h3>
+          {selectedLocation.title !== '전체 보기' ? (
+            <>
+              <p className='text-xl font-bold mb-2'>{selectedLocation.title}</p>
+              <p className='mb-3'>{selectedLocation.description || '설명이 없습니다.'}</p>
+              <div className='grid grid-cols-2 gap-2 text-sm'>
+                <div>
                   <p>
-                    <strong>발견 여부:</strong>{' '}
-                    {selectedLocation.checked ? '발견함 ✓' : '아직 발견하지 않음'}
+                    <strong>위도:</strong> {selectedLocation.lat}
                   </p>
-                )}
+                  <p>
+                    <strong>경도:</strong> {selectedLocation.lng}
+                  </p>
+                </div>
+                <div>
+                  {selectedLocation.id && (
+                    <p>
+                      <strong>발견 여부:</strong>{' '}
+                      {selectedLocation.checked ? '발견함 ✓' : '아직 발견하지 않음'}
+                    </p>
+                  )}
+                </div>
               </div>
-            </div>
-          </>
-        ) : (
-          <p>지도에서 위치를 선택하거나 마커를 클릭하면 해당 장소의 정보가 표시됩니다.</p>
-        )}
+            </>
+          ) : (
+            <p>지도에서 위치를 선택하거나 마커를 클릭하면 해당 장소의 정보가 표시됩니다.</p>
+          )}
+        </div>
       </div>
     </div>
   );

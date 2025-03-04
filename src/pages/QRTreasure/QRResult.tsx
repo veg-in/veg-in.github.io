@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import QRHeader from './_QRHeader';
 
 export default function QRResult() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function QRResult() {
       const hash = searchParams.get('hash');
 
       if (!markerId || !hash) {
-        navigate('/qrtreasure');
+        navigate('/qrtreasure/game');
         return;
       }
 
@@ -34,7 +35,7 @@ export default function QRResult() {
       // 현재 스캔한 마커 찾기
       const currentMarker = allMarkers.find((m) => m.id === markerId && m.hash === hash);
       if (!currentMarker) {
-        navigate('/qrtreasure');
+        navigate('/qrtreasure/map');
         return;
       }
 
@@ -75,56 +76,59 @@ export default function QRResult() {
     processQRCode();
   }, [location.search, navigate]);
 
-  const handleReturnToMap = () => {
-    navigate('/qrtreasure');
-  };
-
   if (isLoading) {
     return (
-      <div className='flex items-center justify-center h-screen'>
-        <div className='text-center'>
-          <p className='text-xl mb-4'>로딩 중...</p>
+      <div className='flex flex-col h-screen'>
+        <QRHeader showBackButton={false} />
+        <div className='flex-grow flex items-center justify-center'>
+          <div className='text-center'>
+            <p className='text-xl mb-4'>로딩 중...</p>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className='flex flex-col items-center justify-center p-8 h-full'>
-      <div className='bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center'>
-        <h1 className='text-3xl font-bold mb-6'>QR 코드 발견!</h1>
+    <div className='flex flex-col min-h-screen'>
+      <QRHeader showBackButton={false} backTo='/qrtreasure/map' />
 
-        <div className='mb-6 p-4 bg-green-100 rounded-lg'>
-          <p className='text-lg font-bold text-green-700'>새로운 장소를 찾았습니다!</p>
-          <p className='text-md text-green-600'>{markerName}</p>
-        </div>
+      <div className='flex-grow flex items-center justify-center p-8'>
+        <div className='bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center'>
+          <h2 className='text-2xl font-bold mb-6'>새로운 장소 발견!</h2>
 
-        <div className='mb-8'>
-          <p className='text-xl mb-2'>
-            총 <span className='font-bold text-blue-600'>{foundMarkers}</span>개의 장소를
-            발견했어요!
-          </p>
+          <div className='mb-6 p-4 bg-green-100 rounded-lg'>
+            <p className='text-lg font-bold text-green-700'>새로운 장소를 찾았습니다!</p>
+            <p className='text-md text-green-600'>{markerName}</p>
+          </div>
 
-          {foundMarkers < totalMarkers && (
-            <p className='text-lg text-gray-600'>
-              <span className='font-bold text-red-500'>{totalMarkers - foundMarkers}</span>개를 더
-              찾아보세요.
+          <div className='mb-8'>
+            <p className='text-xl mb-2'>
+              총 <span className='font-bold text-blue-600'>{foundMarkers}</span>개의 장소를
+              발견했어요!
             </p>
-          )}
 
-          {foundMarkers >= totalMarkers && (
-            <p className='text-lg text-green-600 font-bold'>
-              모든 장소를 발견했습니다! 축하합니다! 🎉
-            </p>
-          )}
+            {foundMarkers < totalMarkers && (
+              <p className='text-lg text-gray-600'>
+                <span className='font-bold text-red-500'>{totalMarkers - foundMarkers}</span>개를 더
+                찾아보세요.
+              </p>
+            )}
+
+            {foundMarkers >= totalMarkers && (
+              <p className='text-lg text-green-600 font-bold'>
+                모든 장소를 발견했습니다! 축하합니다! 🎉
+              </p>
+            )}
+          </div>
+
+          <Link
+            to='/qrtreasure/map'
+            className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200 w-full'
+          >
+            지도로 돌아가기
+          </Link>
         </div>
-
-        <button
-          onClick={handleReturnToMap}
-          className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200 w-full'
-        >
-          지도로 돌아가기
-        </button>
       </div>
     </div>
   );
