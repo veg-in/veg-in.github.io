@@ -9,16 +9,10 @@ const Landing = () => {
       <h1 className='text-4xl font-bold mb-8'>DOKPAMI</h1>
       <div className='flex flex-col gap-4 w-full max-w-md text-center'>
         <Link
-          to='/about'
+          to='/intro'
           className='px-4 py-2 bg-[#FFCE00] text-black rounded-lg border-2 border-gray-950 hover:bg-[#E6B800] transition-colors'
         >
           소개 페이지
-        </Link>
-        <Link
-          to='/aboutnext'
-          className='px-4 py-2 bg-[#FFCE00] text-black rounded-lg border-2 border-gray-950 hover:bg-[#E6B800] transition-colors'
-        >
-          AboutNext 페이지
         </Link>
         <Link
           to='/balancegame'

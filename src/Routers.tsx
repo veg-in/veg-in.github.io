@@ -1,14 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from '@/Layout';
 import Landing from '@/pages/Landing/Landing';
-import About from '@/pages/Landing/About';
+import Intro from '@/pages/Landing/Intro';
 import BalanceGame from '@/pages/BalanceGame/BalanceGame';
 import TestBE from '@/pages/TestBE';
 import QRTreasure from './pages/QRTreasure/QRTreasure';
 import QRLanding from './pages/QRTreasure/QRLanding';
 import QRAdmin from './pages/QRTreasure/QRAdmin';
 import QRResult from './pages/QRTreasure/QRResult';
-import AboutNext from '@/pages/Landing/AboutNext';
 import NotFound from './pages/NotFound';
 
 export default function Routers() {
@@ -18,9 +17,8 @@ export default function Routers() {
         <Route element={<Layout />}>
           <Route path='/' element={<Landing />} />
           {/* TODO : About이 Landing 으로 바뀌어서 /(root) 경로로 가고, */}
-          <Route path='/about' element={<About />} />
+          <Route path='/Intro' element={<Intro />} />
           {/* TODO : AboutNext가 About으로 바뀌어서 /about으로 가야 함 */}
-          <Route path='/aboutnext' element={<AboutNext />} />
 
           {/* Balane Game Path */}
           <Route path='/balancegame'>
