@@ -160,7 +160,7 @@ export default function QRTreasure() {
         </div>
 
         <div className='mt-4 flex rounded-lg'>
-          <img src='/src/assets/profile.png' alt='profile' className='w-1/5 h-fit' />
+          <img src='/profile.png' alt='profile' className='w-1/5 h-fit' />
           <div className='w-full bg-white ml-3 p-2 rounded-xl'>
             {selectedLocation.title !== '전체 보기' ? (
               <>

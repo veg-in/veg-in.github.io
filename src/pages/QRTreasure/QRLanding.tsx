@@ -3,7 +3,7 @@ import QRHeader from './_QRHeader';
 
 export default function QRLanding() {
   return (
-    <div className='bg-[url(/src/assets/background.png)] bg-cover bg-center flex flex-col items-center justify-start min-h-screen w-screen overflow-hidden'>
+    <div className='bg-[url(/public/background.png)] bg-cover bg-center flex flex-col items-center justify-start min-h-screen w-screen overflow-hidden'>
       {/* 공통 헤더 */}
       <QRHeader />
 
@@ -28,10 +28,10 @@ export default function QRLanding() {
           </div>
         </div>
 
-        <div className='mt-20 w-full flex justify-center'>
+        <div className='mt-12 sm:mt-16 md:mt-20 w-full flex justify-center relative z-30'>
           <Link
             to='/qrtreasure/map'
-            className='bg-blue-50 bg-opacity-50 border-2 !border-blue-500 font-Jua text-blue-500 text-2xl md:text-3xl font-bold py-2 px-24 rounded-full shadow-lg hover:bg-blue-600 transition duration-300 ease-in-out'
+            className='bg-blue-50 bg-opacity-50 border-2 !border-blue-500 font-Jua text-blue-500 text-2xl md:text-3xl font-bold py-2 px-12 sm:px-16 md:px-24 rounded-full shadow-lg hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out'
             style={{
               boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
               border: '2px solid white',
@@ -44,9 +44,9 @@ export default function QRLanding() {
 
       <div className='absolute bottom-0 z-20 w-full flex justify-center'>
         <img
-          src='src/assets/pamzzoo_QR.png'
+          src='/pamzzoo_QR.png'
           alt='캐릭터'
-          className='w-64 md:w-80 '
+          className='w-64 md:w-80'
           style={{
             filter: 'drop-shadow(0 -5px 10px rgba(0, 0, 0, 0.1))',
             transform: 'scale(1.5)',

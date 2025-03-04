@@ -104,7 +104,7 @@ export default function QRResult() {
         <div className='bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center'>
           <h2 className='text-2xl font-bold mb-6'>보물찾기 성공!</h2>
 
-          <img src='/src/assets/fullshot.png' alt='캐릭터' className='w-full h-auto' />
+          <img src='/fullshot.png' alt='캐릭터' className='w-full h-auto' />
           <p className='pt-8 text-[20px] font-bold '>지금까지 {foundMarkers}개의 보물을 찾았어요</p>
 
           <p className=' py-6 text-[18px]'>
