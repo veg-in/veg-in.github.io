@@ -19,7 +19,7 @@ export default function QRLanding() {
             팜쭈의 보물을 찾아라!
           </h1>
 
-          <div className='bg-blue-50 bg-opacity-50 rounded-xl px-2 py-2 shadow-md max-w-md mx-auto'>
+          <div className='bg-blue-50 bg-opacity-50 font-Jua rounded-xl px-2 py-2 shadow-md max-w-md mx-auto'>
             <p className='md:text-xl text-center'>
               동아리 박람회 곳곳에 숨겨진 QR 코드를 찾고
               <br />

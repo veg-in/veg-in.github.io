@@ -3,13 +3,13 @@ import { ConnectButton } from '@mysten/dapp-kit';
 
 export default function Layout() {
   const location = useLocation();
-  const isLandingPage = location.pathname === '/about' || location.pathname === '/aboutnext' ;
-  const isQrTreasurePage = location.pathname === '/qrtreasure';
+  const isLandingPage = location.pathname === '/about' || location.pathname === '/aboutnext' || location.pathname === '/qrtreasure';
+  const isQrTreasurePage = location.pathname.startsWith('/qrtreasure');
 
   return (
     <div
       className={`max-w-[600px] min-h-screen bg-[#BEDEFE] mx-auto flex flex-col items-center justify-start overflow-y-auto ${
-        isLandingPage || isQrTreasurePage ? '' : 'px-8'
+        isLandingPage  ? '' : 'px-8'
       }`}
     >
       {!isQrTreasurePage && (

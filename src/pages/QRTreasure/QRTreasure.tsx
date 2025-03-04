@@ -1,16 +1,7 @@
 import { useState, useEffect } from 'react';
 import KakaoMap from './_KakaoMap';
 import QRHeader from './_QRHeader';
-
-interface Location {
-  title: string;
-  lat: number;
-  lng: number;
-  checked: boolean;
-  id?: string;
-  hash?: string;
-  description?: string;
-}
+import { LocationData, QRLocations } from '@/data/QRMapData';
 
 declare global {
   interface Window {
@@ -19,63 +10,9 @@ declare global {
 }
 
 export default function QRTreasure() {
-  const [locations, setLocations] = useState<Location[]>([
-    { title: '전체 보기', lat: 37.56357067982097, lng: 126.93782429801615, checked: false },
-    {
-      title: '중도',
-      lat: 37.563743700106016,
-      lng: 126.93702902334138,
-      checked: false,
-      id: '1',
-      hash: 'a1b2c3d4',
-      description: '설명어쩌구',
-    },
-    {
-      title: '백주년기념관',
-      lat: 37.5620796504564,
-      lng: 126.93805190387629,
-      checked: false,
-      id: '2',
-      hash: 'e5f6g7h8',
-      description: '설명어쩌구',
-    },
-    {
-      title: '경영관',
-      lat: 37.56483268505036,
-      lng: 126.93899474018608,
-      checked: false,
-      id: '3',
-      hash: 'i9j0k1l2',
-      description: '설명어쩌구',
-    },
-    {
-      title: '대운동장',
-      lat: 37.56226633676402,
-      lng: 126.93341687864819,
-      checked: false,
-      id: '4',
-      hash: 'm3n4o5p6',
-      description: '설명어쩌구',
-    },
-    {
-      title: '독수리상',
-      lat: 37.56216023139825,
-      lng: 126.93708977744795,
-      checked: false,
-      id: '5',
-      hash: 'q7r8s9t0',
-      description: '설명어쩌구',
-    },
-    {
-      title: '학관앞',
-      lat: 37.56348529465163,
-      lng: 126.93822334786489,
-      checked: false,
-      id: '6',
-      hash: 'u1v2w3x4',
-      description: '설명어쩌구',
-    },
-  ]);
+  const [locations, setLocations] = useState<(LocationData & { checked: boolean })[]>(
+    QRLocations.map((loc) => ({ ...loc, checked: false })),
+  );
 
   const [selectedLocation, setSelectedLocation] = useState(locations[0]);
   const [, setFoundCount] = useState(0);
@@ -127,9 +64,8 @@ export default function QRTreasure() {
       {/* 공통 헤더 - 뒤로가기 버튼 활성화 */}
       <QRHeader showBackButton={true} backTo='/qrtreasure' />
 
-      <div className='pt-[80px]'>
+      <div className='pt-12'>
         <div className='mb-4'>
-          <h2 className='text-xl font-semibold mb-2'>보물 위치 찾기</h2>
           <div className='flex flex-wrap gap-2'>
             {locations.map((location, index) => (
               <button
@@ -149,7 +85,7 @@ export default function QRTreasure() {
         <div className='rounded-lg overflow-hidden border border-gray-300'>
           <KakaoMap
             width='100%'
-            height='400px'
+            height='350px'
             latitude={selectedLocation.lat}
             longitude={selectedLocation.lng}
             level={3}
