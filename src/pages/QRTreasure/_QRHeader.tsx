@@ -32,7 +32,7 @@ const QRHeader: React.FC<QRHeaderProps> = ({
   };
 
   return (
-    <div className='sticky top-0 z-50 w-full bg-gradient-to-b pt-2 pb-3'>
+    <div className='sticky top-5 z-50 w-full bg-gradient-to-b pt-2 pb-3'>
       <div className='flex items-center justify-between px-4 md:px-6'>
         {/* 왼쪽 영역 (뒤로가기 버튼) */}
         <div className='w-10'>

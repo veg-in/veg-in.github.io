@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import QRHeader from './_QRHeader';
+import captureAndShare from '@/lib/share';
 
 export default function QRResult() {
   const navigate = useNavigate();
@@ -89,45 +90,45 @@ export default function QRResult() {
     );
   }
 
+  function remainCount() {
+    if (foundMarkers < 1) return 1;
+    else if (foundMarkers < 3) return 3 - foundMarkers;
+    else if (foundMarkers < 6) return 6 - foundMarkers;
+  }
+
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div className='flex flex-col w-full min-h-screen'>
       <QRHeader showBackButton={false} backTo='/qrtreasure/map' />
 
-      <div className='flex-grow flex items-center justify-center p-8'>
+      <div id='nftcapture' className='flex-grow flex items-center justify-center p-8'>
         <div className='bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center'>
-          <h2 className='text-2xl font-bold mb-6'>새로운 장소 발견!</h2>
+          <h2 className='text-2xl font-bold mb-6'>보물찾기 성공!</h2>
 
-          <div className='mb-6 p-4 bg-green-100 rounded-lg'>
-            <p className='text-lg font-bold text-green-700'>새로운 장소를 찾았습니다!</p>
-            <p className='text-md text-green-600'>{markerName}</p>
-          </div>
+          <img src='/src/assets/fullshot.png' alt='캐릭터' className='w-full h-auto' />
+          <p className='pt-8 text-[20px] font-bold '>지금까지 {foundMarkers}개의 보물을 찾았어요</p>
 
-          <div className='mb-8'>
-            <p className='text-xl mb-2'>
-              총 <span className='font-bold text-blue-600'>{foundMarkers}</span>개의 장소를
-              발견했어요!
-            </p>
-
-            {foundMarkers < totalMarkers && (
-              <p className='text-lg text-gray-600'>
-                <span className='font-bold text-red-500'>{totalMarkers - foundMarkers}</span>개를 더
-                찾아보세요.
-              </p>
-            )}
-
-            {foundMarkers >= totalMarkers && (
-              <p className='text-lg text-green-600 font-bold'>
-                모든 장소를 발견했습니다! 축하합니다! 🎉
-              </p>
-            )}
-          </div>
+          <p className=' py-6 text-[18px]'>
+            {remainCount()}개만 더 찾으면 <br />
+            {`<`}다음 선물{`>`}을 받을 수 있어요!
+          </p>
 
           <Link
             to='/qrtreasure/map'
-            className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200 w-full'
+            className='flex justify-center text-[18px] bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200 '
           >
-            지도로 돌아가기
+            보물 더 찾기
           </Link>
+
+          <button
+            onClick={() => captureAndShare()}
+            className='my-4 w-full justify-center text-[18px] bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200 '
+          >
+            인스타에 공유하고 선물 받기
+          </button>
+
+          <p className='text-[13px]'>
+            ※ 인스타그램에 공유하실 때 <br /> “@dokpami.nft”를 태그해주세요!
+          </p>
         </div>
       </div>
     </div>
