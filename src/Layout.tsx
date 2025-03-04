@@ -3,12 +3,12 @@ import { ConnectButton } from '@mysten/dapp-kit';
 
 export default function Layout() {
   const location = useLocation();
-  const isSpecialPage = location.pathname === '/about' || location.pathname === '/AboutNext';
+  const isLandingPage = location.pathname === '/about' || location.pathname === '/aboutnext';
 
   return (
     <div
-      className={`max-w-[600px] min-h-screen mx-auto flex flex-col items-center justify-start px-8 overflow-y-auto ${
-        isSpecialPage ? 'bg-[#69B0EE]' : 'bg-[#88D0E5]'
+      className={`max-w-[600px] min-h-screen bg-[#BEDEFE] mx-auto flex flex-col items-center justify-start overflow-y-auto ${
+        isLandingPage ? '' : 'px-8'
       }`}
     >
       <div className='w-full flex justify-between'>
