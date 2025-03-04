@@ -3,23 +3,12 @@ import QRHeader from './_QRHeader';
 
 export default function QRLanding() {
   return (
-    <div className='relative flex flex-col items-center w-full'>
+    <div className='bg-[url(/src/assets/background.png)] bg-cover bg-center flex flex-col items-center justify-center min-h-screen'>
       {/* 공통 헤더 */}
       <QRHeader />
 
-      {/* 배경 요소 - 건물 실루엣 */}
-      <div
-        className='absolute bottom-0 w-full h-2/3 z-0 opacity-20'
-        style={{
-          backgroundImage: 'url("@/src/background.png")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center bottom',
-          backgroundRepeat: 'no-repeat',
-        }}
-      ></div>
-
       {/* 메인 콘텐츠 */}
-      <div className='z-10 flex-grow flex flex-col items-center justify-center px-6 pt-8 pb-32 md:pb-40'>
+      <div className='flex-grow flex flex-col items-center justify-center px-6 pt-8 pb-32 md:pb-40'>
         <div className='text-center mb-8'>
           <h1
             className='text-4xl font-Title  md:text-5xl font-bold mb-12 text-blue-500'
@@ -58,7 +47,7 @@ export default function QRLanding() {
       {/* 하단 캐릭터 */}
       <div className='absolute bottom-0 z-20 w-full flex justify-center'>
         <img
-          src='/character.png'
+          src='/src/assets/pamzzoo_QR.png'
           alt='캐릭터'
           className='w-48 md:w-56 h-auto'
           style={{
