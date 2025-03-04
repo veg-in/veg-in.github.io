@@ -44,7 +44,7 @@ export default function QRLanding() {
 
       <div className='absolute bottom-0 z-20 w-full flex justify-center'>
         <img
-          src='/src/assets/pamzzoo_QR.png'
+          src='src/assets/pamzzoo_QR.png'
           alt='캐릭터'
           className='w-64 md:w-80 '
           style={{
