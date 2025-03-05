@@ -99,7 +99,7 @@ export default function QRResult() {
     if (foundMarkers === 0) {
       return {
         count: 1,
-        img: '/banana.png',
+        img: '/pamchu.png',
         currentPresent: '아직 보물을 찾지 않았어요',
         nextPresent: '바나나우유',
       };
