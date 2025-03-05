@@ -17,7 +17,7 @@ export const QRLocations: LocationData[] = [
     checked: false,
     id: '1',
     hash: 'a1b2c3d4',
-    description: '도서관 정문을 찾아와! 게시판 좌측에 보물이 숨어있어.',
+    description: '연세대학교 정문 우측의 안내판 뒤를 확인해봐. 거기에 보물이 있어!',
   },
   {
     title: '공학관 앞',
