@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import KakaoMap from './_KakaoMap';
 import QRHeader from './_QRHeader';
 import { LocationData, QRLocations } from '@/data/QRMapData';
+import { HiOutlineChevronDown, HiOutlineChevronUp } from 'react-icons/hi';
 
 declare global {
   interface Window {
@@ -70,7 +71,7 @@ export default function QRTreasure() {
             {locations.map((location, index) => (
               <button
                 key={index}
-                className={`px-4 py-2 rounded flex items-center font-semibold ${
+                className={`px-4 py-2 rounded flex items-center font-semibold cursor-pointer ${
                   selectedLocation.title === location.title ? 'bg-blue-500 text-white' : 'bg-white'
                 } ${location.checked ? 'border-2 border-red-500' : ''}`}
                 onClick={() => setSelectedLocation(location)}
@@ -120,23 +121,30 @@ export default function QRTreasure() {
         </div>
 
         <div className='mt-4 border-2 p-4 rounded-xl w-full bg-[#FFFDF2]'>
-          <div className='flex justify-between'>
-            <h3 className='text-[18px] font-bold'>이벤트 참여 방법 알아보기</h3>
-            <button onClick={() => setIsOpen(!isOpen)}>더보기</button>
-          </div>
+          <button
+            className='w-full cursor-pointer flex justify-between text-[18px] '
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <h3 className='font-bold'>이벤트 참여 방법 알아보기</h3>
+            {isOpen ? (
+              <HiOutlineChevronUp className='my-auto text-center' />
+            ) : (
+              <HiOutlineChevronDown className='my-auto text-center' />
+            )}
+          </button>
           {isOpen ? (
             <>
               <br />
-              <div className='text-[14px] text-[#191F28] font-regular'>
-                <p className='text-[16px] font-bold underline'>이벤트 참여 방법</p>
+              <div className='text-[16px] text-[#191F28] font-regular'>
+                <p className='text-[18px] font-bold underline'>이벤트 참여 방법</p>
                 <p>1. 📍 지도에서 위치 마크 보고 QR코드 찾기</p>
                 <p>2. 📸 카메라로 QR코드 스캔하기</p>
                 <p>3. 📲 공유하기 버튼을 통해 인스타에 공유하고 @dokpami.nft 태그하기</p>
                 <p>4. 🔍 다음 QR코드를 찾아 더 나은 선물 받기</p>
               </div>
               <br />
-              <div className='text-[14px] text-[#191F28] font-regula'>
-                <p className='text-[16px] font-bold underline'>상품 안내</p>
+              <div className='text-[16px] text-[#191F28] font-regula'>
+                <p className='text-[18px] font-bold underline'>상품 안내</p>
                 <p>· 6개 QR코드 중 1개 이상 스캔 시 🥛바나나우유 10명 (추첨)</p>
                 <p>· 6개 QR코드 중 3개 이상 스캔 시 ☕스타벅스 커피 3명 (추첨)</p>
                 <p>· 6개 QR코드 모두 스캔 시 🏆선착순 1명에게 스탠리 텀블러 지급</p>

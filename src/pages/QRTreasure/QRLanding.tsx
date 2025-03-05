@@ -3,7 +3,7 @@ import QRHeader from './_QRHeader';
 
 export default function QRLanding() {
   return (
-    <div className='bg-[url(/public/background.png)] bg-cover bg-center flex flex-col items-center justify-start min-h-screen w-screen overflow-hidden'>
+    <div className='bg-[url(/public/background.png)] bg-cover bg-center flex flex-col items-center justify-start w-full min-h-screen overflow-hidden'>
       {/* 공통 헤더 */}
       <QRHeader />
 

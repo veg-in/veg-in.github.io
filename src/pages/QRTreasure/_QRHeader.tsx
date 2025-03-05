@@ -39,7 +39,7 @@ const QRHeader: React.FC<QRHeaderProps> = ({
           {showBackButton && (
             <button
               onClick={handleBack}
-              className='p-2 rounded-full hover:bg-blue-200 transition-colors'
+              className='cursor-pointer p-2 rounded-full hover:bg-blue-200 transition-colors'
               aria-label='뒤로 가기'
             >
               <svg
