@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import KakaoMap from './_KakaoMap';
 import QRHeader from './_QRHeader';
 import { LocationData, QRLocations } from '@/data/QRMapData';
@@ -16,9 +17,9 @@ export default function QRTreasure() {
   );
 
   const [selectedLocation, setSelectedLocation] = useState(locations[0]);
-  const [, setFoundCount] = useState(0);
+  const [foundCount, setFoundCount] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
-  // const totalMarkers = locations.length - 1; // "전체 보기" 제외
+  const totalMarkers = locations.length - 1; // "전체 보기" 제외
 
   // 로컬 스토리지에서 발견한 마커 정보 로딩
   useEffect(() => {
@@ -157,6 +158,12 @@ export default function QRTreasure() {
             <></>
           )}
         </div>
+        <Link
+          to='/qrtreasure/result'
+          className='w-full block text-center text-[18px] bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition duration-200'
+        >
+          결과 보러 가기
+        </Link>
       </div>
     </div>
   );
