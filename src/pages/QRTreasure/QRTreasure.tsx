@@ -61,7 +61,7 @@ export default function QRTreasure() {
   };
 
   return (
-    <div className='flex flex-col max-w-4xl mx-auto '>
+    <div className='flex flex-col max-w-4xl mx-auto'>
       {/* 공통 헤더 - 뒤로가기 버튼 활성화 */}
       <QRHeader showBackButton={true} backTo='/qrtreasure' />
 
@@ -71,7 +71,7 @@ export default function QRTreasure() {
             {locations.map((location, index) => (
               <button
                 key={index}
-                className={`text-sm sm:text-base md:text-lg px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-lg font-semibold cursor-pointer whitespace-nowrap ${
+                className={`text-xs sm:text-sm md:text-base px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-2.5 rounded-lg font-semibold cursor-pointer whitespace-nowrap ${
                   location.checked
                     ? 'bg-red-500 text-white'
                     : selectedLocation.title === location.title
@@ -89,7 +89,7 @@ export default function QRTreasure() {
         <div className='rounded-lg overflow-hidden border border-gray-300'>
           <KakaoMap
             width='100%'
-            height='350px'
+            height='300px'
             latitude={selectedLocation.lat}
             longitude={selectedLocation.lng}
             level={3}
@@ -101,21 +101,27 @@ export default function QRTreasure() {
 
         <div className='mt-4 flex rounded-lg'>
           <img src='/profile.png' alt='profile' className='w-1/5 h-fit' />
-          <div className='w-full bg-white ml-3 p-2 rounded-xl'>
+          <div className='bg-[url(/chat.png)] bg-cover bg-center w-full ml-1 py-2 pl-4 pr-3 min-h-[80px] flex flex-col justify-center'>
             {selectedLocation.title !== '전체 보기' ? (
               <>
-                <p className='text-xl font-bold mb-2'>{selectedLocation.title}</p>
-                <p className='mb-3'>{selectedLocation.description || '설명이 없습니다.'}</p>
+                <p className='text-base sm:text-lg md:text-xl font-bold mb-1 sm:mb-2'>
+                  {selectedLocation.title}
+                </p>
+                <p className='text-xs sm:text-sm md:text-base'>
+                  {selectedLocation.description || '설명이 없습니다.'}
+                </p>
               </>
             ) : (
-              <p>지도에서 위치를 선택하거나 마커를 클릭하면 해당 장소의 정보가 표시됩니다.</p>
+              <p className='text-base'>
+                지도에서 위치를 선택하거나 마커를 클릭하면 해당 장소의 정보가 표시됩니다.
+              </p>
             )}
           </div>
         </div>
 
-        <div className='my-4 border-2 p-4 rounded-xl w-full bg-[#FFFDF2]'>
+        <div className='my-4 border-2 p-3 sm:p-4 rounded-xl w-full bg-[#FFFDF2]'>
           <button
-            className='w-full cursor-pointer flex justify-between text-[18px] '
+            className='w-full cursor-pointer flex justify-between text-sm sm:text-base md:text-lg'
             onClick={() => setIsOpen(!isOpen)}
           >
             <h3 className='font-bold'>이벤트 참여 방법 알아보기</h3>
@@ -128,16 +134,18 @@ export default function QRTreasure() {
           {isOpen ? (
             <>
               <br />
-              <div className='text-[16px] text-[#191F28] font-regular'>
-                <p className='text-[18px] font-bold underline'>이벤트 참여 방법</p>
+              <div className='text-xs sm:text-sm md:text-base text-[#191F28] font-regular'>
+                <p className='text-sm sm:text-base md:text-lg font-bold underline'>
+                  이벤트 참여 방법
+                </p>
                 <p>1. 📍 지도에서 위치 마크 보고 QR코드 찾기</p>
                 <p>2. 📸 카메라로 QR코드 스캔하기</p>
                 <p>3. 📲 공유하기 버튼을 통해 인스타에 공유하고 @dokpami.nft 태그하기</p>
                 <p>4. 🔍 다음 QR코드를 찾아 더 나은 선물 받기</p>
               </div>
               <br />
-              <div className='text-[16px] text-[#191F28] font-regula'>
-                <p className='text-[18px] font-bold underline'>상품 안내</p>
+              <div className='text-xs sm:text-sm md:text-base text-[#191F28] font-regular'>
+                <p className='text-sm sm:text-base md:text-lg font-bold underline'>상품 안내</p>
                 <p>· 6개 QR코드 중 1개 이상 스캔 시 🥛바나나우유 10명 (추첨)</p>
                 <p>· 6개 QR코드 중 3개 이상 스캔 시 ☕스타벅스 커피 3명 (추첨)</p>
                 <p>· 6개 QR코드 모두 스캔 시 🏆1명에게 스탠리 텀블러 지급 (추첨)</p>

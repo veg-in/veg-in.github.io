@@ -42,9 +42,7 @@ export default function KakaoMap({
     script.async = true;
 
     script.onload = () => {
-      console.log('카카오맵 스크립트 로드 성공');
       window.kakao.maps.load(() => {
-        console.log('카카오맵 초기화 완료');
         setIsScriptLoaded(true);
       });
     };
@@ -63,16 +61,14 @@ export default function KakaoMap({
     if (!isScriptLoaded || !mapRef.current) return;
 
     try {
-      console.log('지도 객체 생성 시작');
       const options = {
         center: new window.kakao.maps.LatLng(latitude, longitude),
         level: level,
       };
 
       const map = new window.kakao.maps.Map(mapRef.current, options);
-      console.log('지도 생성됨');
 
-      const markerImgSrc = '/marker_white.png';
+      const markerImgSrc = '/marker_yellow.png';
       const checkedMarkerImgSrc = '/marker_red.png'; // 선택된 마커 이미지
       const normalSize = new window.kakao.maps.Size(30, 45); // 기본 마커 사이즈
       const hoverSize = new window.kakao.maps.Size(32, 48); // 마우스 오버시 마커 사이즈
@@ -120,7 +116,6 @@ export default function KakaoMap({
         if (!bounds.isEmpty()) {
           map.setBounds(bounds); // 지도 크기 자동 조정
         }
-        console.log('모든 마커 추가됨');
       } else {
         // 장소 선택 시, 마커 하나 표시
         const selectedLoc = locations.find((loc) => loc.lat === latitude && loc.lng === longitude);
@@ -145,7 +140,6 @@ export default function KakaoMap({
           onMarkerClick(selectedLoc.title);
         });
         marker.setMap(map);
-        console.log('단일 마커 추가됨');
       }
       // 지도 크기 조정 이벤트 발생
       setTimeout(() => {
