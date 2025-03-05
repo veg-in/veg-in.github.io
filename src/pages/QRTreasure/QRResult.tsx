@@ -91,9 +91,9 @@ export default function QRResult() {
   }
 
   function remainCount() {
-    if (foundMarkers < 1) return 1;
-    else if (foundMarkers < 3) return 3 - foundMarkers;
-    else if (foundMarkers < 6) return 6 - foundMarkers;
+    if (foundMarkers < 1) return { count: 1, present: '바나나우유' };
+    else if (foundMarkers < 3) return { count: 3 - foundMarkers, present: '스타벅스 커피' };
+    else if (foundMarkers < 6) return { count: 6 - foundMarkers, present: '스탠리 텀블러' };
   }
 
   return (
@@ -102,14 +102,14 @@ export default function QRResult() {
 
       <div id='nftcapture' className='flex-grow flex items-center justify-center p-8'>
         <div className='bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center'>
-          <h2 className='text-2xl font-bold mb-6'>보물찾기 성공!</h2>
+          <h2 className='font-Title text-blue-500 text-3xl font-bold mb-6'>보물찾기 성공!</h2>
 
-          <img src='/fullshot.png' alt='캐릭터' className='w-full h-auto' />
+          <img src='/fullshot.png' alt='캐릭터' className='w-3/4 m-auto h-auto' />
           <p className='pt-8 text-[20px] font-bold '>지금까지 {foundMarkers}개의 보물을 찾았어요</p>
 
           <p className=' py-6 text-[18px]'>
-            {remainCount()}개만 더 찾으면 <br />
-            {`<`}다음 선물{`>`}을 받을 수 있어요!
+            {remainCount()?.count}개만 더 찾으면 <br />
+            {remainCount()?.present}를 받을 수 있어요!
           </p>
 
           <Link
