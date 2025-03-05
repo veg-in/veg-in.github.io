@@ -158,12 +158,14 @@ export default function QRTreasure() {
             <></>
           )}
         </div>
-        <Link
-          to='/qrtreasure/result'
-          className='w-full block text-center text-[18px] bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition duration-200'
-        >
-          결과 보러 가기
-        </Link>
+        <div className='mt-4'>
+          <Link
+            to='/qrtreasure/result'
+            className='w-full block text-center text-sm mb-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition duration-200'
+          >
+            결과 보러 가기
+          </Link>
+        </div>
       </div>
     </div>
   );
