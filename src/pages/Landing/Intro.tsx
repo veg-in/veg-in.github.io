@@ -1,4 +1,4 @@
-import { HiOutlineChevronDown } from 'react-icons/hi';
+import { HiOutlineChevronDown, HiOutlineChevronUp } from 'react-icons/hi';
 import { useState } from 'react';
 
 export default function Intro() {
@@ -8,8 +8,8 @@ export default function Intro() {
   };
 
   return (
-    <div className='relative w-full h-auto bg-[#EBF3FE]'>
-      <div className='mb-13 mt-15 ml-8'>
+    <div className='w-full h-auto bg-[#EBF3FE]'>
+      <div className='pb-12 pt-15 ml-8'>
         <h1 className='font-bold text-5xl mb-2'>PAMCHU</h1>
         <h2 className='font-bold text-xl mb-2'>팜쭈</h2>
         <span className='text-base'>
@@ -19,18 +19,27 @@ export default function Intro() {
         </span>
       </div>
 
-      <div className='absolute w-full h-68 bg-[#C9DDFB]'></div>
-      <img src='/pamchu.png' className='relative w-80 object-cover ml-50 bottom-20' />
-
-      <div className='flex items-center justify-center mt-[-70px]'>
-        <button className='p-3 text-[#0080FF]' onClick={toggleVisibility}>
-          <HiOutlineChevronDown className='w-15 h-15' />
-        </button>
+      <div className=' w-full bg-[#C9DDFB]'>
+        <img src='/pamchu.png' className=' w-2/3 mx-auto translate-x-1/4 -translate-y-1/4' />
+      </div>
+      <div className=' w-full min-h-[50px] bg-[#EBF3FE] -translate-y-full'>
+        <div className='flex items-center justify-center z-10'>
+          <button
+            className=' flex items-center justify-center z-10 p-3 cursor-pointer text-[#0080FF]'
+            onClick={toggleVisibility}
+          >
+            {isVisible ? (
+              <HiOutlineChevronUp className='w-12 h-12' />
+            ) : (
+              <HiOutlineChevronDown className='w-12 h-12' />
+            )}
+          </button>
+        </div>
       </div>
 
       {isVisible && (
-        <div>
-          <div className='flex flex-col items-center justify-center ml-10 mr-10'>
+        <div className=''>
+          <div className='flex flex-col items-center justify-center px-10'>
             <p>
               2025년 3월, 어린 독수리 팜쭈는 백양로 아스팔트에 불시착한 <br />
               후, 팜희를 사부로 삼아 대학 생활을 배우기 시작한다. 끝없는 <br />
@@ -41,13 +50,15 @@ export default function Intro() {
               거치며 여러 퀘스트들을 하나하나 깨나가는데...{' '}
             </p>
           </div>
-          <div className='flex mt-15'>
-            <div className='ml-7'>
+          <div className='flex ml-7 mt-15'>
+            <div>
               <img src='Pamhi.png' className='flex-shrink-0 w-31' />
+              <div className='font-bold text-sm mt-2'>
+                <span>독팜희 / 팜쭈 선배</span>
+              </div>
             </div>
-            <div className='relative mt-1'>
-              <img src='chat.png' className='flex-shrink-0 w-90 ml-1' />
-              <div className='absolute top-3 ml-13 text-sm'>
+            <div className='w-fit mt-1 mx-3 bg-white p-3 rounded-2xl'>
+              <div className=' text-sm'>
                 안녕! 나는 팜쭈의 짝선 독팜희야. <br />
                 다시 만나서 반가워. 설마 벌써 나를 까먹진 <br />
                 않았지?! 나는 연세대학교 싱크로나이즈드 <br />
@@ -57,15 +68,9 @@ export default function Intro() {
               </div>
             </div>
           </div>
-          <div className='font-bold text-sm ml-[32px] mt-[-12px]'>
-            <span>독팜희 / 팜쭈 선배</span>
-          </div>
         </div>
       )}
-
-      <div className='flex items-center justify-center mt-20 mb-10'>
-        <img src='blocklogo.png' className='w-30 object-cover' />
-      </div>
+      <img src='blocklogo.png' className='mx-auto py-6 w-1/5 object-cover' />
     </div>
   );
 }
