@@ -67,17 +67,20 @@ export default function QRTreasure() {
 
       <div className='pt-12'>
         <div className='mb-4'>
-          <div className='flex flex-wrap gap-2'>
+          <div className='flex items-center justify-center space-x-2 sm:space-x-3 md:space-x-4 lg:space-x-5 px-2 sm:px-4 md:px-6'>
             {locations.map((location, index) => (
               <button
                 key={index}
-                className={`px-4 py-2 rounded flex items-center font-semibold cursor-pointer ${
-                  selectedLocation.title === location.title ? 'bg-blue-500 text-white' : 'bg-white'
-                } ${location.checked ? 'border-2 border-red-500' : ''}`}
+                className={`text-sm sm:text-base md:text-lg px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-lg font-semibold cursor-pointer whitespace-nowrap ${
+                  location.checked
+                    ? 'bg-red-500 text-white'
+                    : selectedLocation.title === location.title
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-white'
+                }`}
                 onClick={() => setSelectedLocation(location)}
               >
-                {location.title}
-                {location.checked && <span className='ml-2 text-red-500'>✓</span>}
+                {location.id ? location.id : '전체'}
               </button>
             ))}
           </div>
@@ -120,7 +123,7 @@ export default function QRTreasure() {
           </div>
         </div>
 
-        <div className='mt-4 border-2 p-4 rounded-xl w-full bg-[#FFFDF2]'>
+        <div className='my-4 border-2 p-4 rounded-xl w-full bg-[#FFFDF2]'>
           <button
             className='w-full cursor-pointer flex justify-between text-[18px] '
             onClick={() => setIsOpen(!isOpen)}
