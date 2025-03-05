@@ -25,12 +25,12 @@ export default function QRResult() {
 
       // 전체 마커 목록 (QRTreasure의 locations 배열과 일치해야 함)
       const allMarkers = [
-        { id: '1', hash: 'a1b2c3d4', title: '중도' },
-        { id: '2', hash: 'e5f6g7h8', title: '백주년기념관' },
-        { id: '3', hash: 'i9j0k1l2', title: '경영관' },
-        { id: '4', hash: 'm3n4o5p6', title: '대운동장' },
-        { id: '5', hash: 'q7r8s9t0', title: '독수리상' },
-        { id: '6', hash: 'u1v2w3x4', title: '학관앞' },
+        { id: '1', hash: 'a1b2c3d4', title: '정문' },
+        { id: '2', hash: 'e5f6g7h8', title: '공학관 앞' },
+        { id: '3', hash: 'i9j0k1l2', title: '백양누리' },
+        { id: '4', hash: 'm3n4o5p6', title: '독수리상' },
+        { id: '5', hash: 'q7r8s9t0', title: '중도 앞' },
+        { id: '6', hash: 'u1v2w3x4', title: '도서관 앞 용재상' },
       ];
 
       // 현재 스캔한 마커 찾기
@@ -91,42 +91,69 @@ export default function QRResult() {
   }
 
   function remainCount() {
-    if (foundMarkers < 1) return { count: 1, present: '바나나우유' };
-    else if (foundMarkers < 3) return { count: 3 - foundMarkers, present: '스타벅스 커피' };
-    else if (foundMarkers < 6) return { count: 6 - foundMarkers, present: '스탠리 텀블러' };
+    if (foundMarkers === 1 || foundMarkers === 2)
+      return {
+        count: 3 - foundMarkers,
+        img: '/banana.png',
+        currentPresent: '바나나우유',
+        nextPresent: '스타벅스 커피',
+      };
+    if (foundMarkers === 3 || foundMarkers === 4 || foundMarkers === 5)
+      return {
+        count: 6 - foundMarkers,
+        img: '/coffee.png',
+        currentPresent: '스타벅스 커피',
+        nextPresent: '스탠리 텀블러',
+      };
+    if (foundMarkers === 6)
+      return {
+        count: 6 - foundMarkers,
+        img: '/cup.png',
+        currentPresent: '스탠리 텀블러',
+        nextPresent: '',
+      };
   }
 
   return (
     <div className='flex flex-col w-full min-h-screen'>
       <QRHeader showBackButton={false} backTo='/qrtreasure/map' />
 
-      <div id='nftcapture' className='flex-grow flex items-center justify-center p-8'>
+      <div className='flex-grow flex items-center justify-center p-8'>
         <div className='bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center'>
-          <h2 className='font-Title text-blue-500 text-3xl font-bold mb-6'>보물찾기 성공!</h2>
-
-          <img src='/fullshot.png' alt='캐릭터' className='w-3/4 m-auto h-auto' />
-          <p className='pt-8 text-[20px] font-bold '>지금까지 {foundMarkers}개의 보물을 찾았어요</p>
-
-          <p className=' py-6 text-[18px]'>
-            {remainCount()?.count}개만 더 찾으면 <br />
-            {remainCount()?.present}를 받을 수 있어요!
+          <img
+            id='nftcapture'
+            src={remainCount()?.img}
+            alt='캐릭터'
+            className='w-full m-auto h-auto'
+          />
+          <p className='pt-8 text-[18px] font-bold '>
+            지금까지 {foundMarkers}개의 보물을 찾았어요!
+            <br />
+            스토리 공유하고 {remainCount()?.currentPresent}를 받아가세요🎉
           </p>
+
+          {foundMarkers !== 6 && (
+            <p className=' pt-6 text-[16px]'>
+              {remainCount()?.count}개만 더 찾으면 <br />
+              {remainCount()?.nextPresent}를 받을 수 있어요!
+            </p>
+          )}
 
           <Link
             to='/qrtreasure/map'
-            className='flex justify-center text-[18px] bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200 '
+            className='flex justify-center text-[18px] bg-blue-500 hover:bg-blue-600 text-white font-bold my-4 py-3 px-6 rounded-lg transition duration-200 '
           >
             보물 더 찾기
           </Link>
 
           <button
             onClick={() => captureAndShare()}
-            className='my-4 w-full justify-center text-[18px] bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200 '
+            className='w-full justify-center text-[18px] bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200 '
           >
             인스타에 공유하고 선물 받기
           </button>
 
-          <p className='text-[13px]'>
+          <p className='mt-4 text-[13px]'>
             ※ 인스타그램에 공유하실 때 <br /> “@dokpami.nft”를 태그해주세요!
           </p>
         </div>
