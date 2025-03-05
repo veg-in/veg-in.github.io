@@ -1,6 +1,5 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 interface QRHeaderProps {
   showBackButton?: boolean;
   backTo?: string;
@@ -31,14 +30,14 @@ const QRHeader: React.FC<QRHeaderProps> = ({
   };
 
   return (
-    <div className='sticky top-5 z-50 w-full bg-gradient-to-b pt-2 pb-3'>
-      <div className='flex items-center justify-between px-4 md:px-6'>
+    <div className='sticky top-5 z-50 w-full pt-2 pb-3'>
+      <div className='flex items-center justify-between'>
         {/* 왼쪽 영역 (뒤로가기 버튼) */}
         <div className='w-10'>
           {showBackButton && (
             <button
               onClick={handleBack}
-              className='cursor-pointer p-2 rounded-full hover:bg-blue-200 transition-colors'
+              className='cursor-pointer p-1 rounded-full hover:bg-blue-200 transition-colors'
               aria-label='뒤로 가기'
             >
               <svg

@@ -101,7 +101,7 @@ export default function QRTreasure() {
 
         <div className='mt-4 flex rounded-lg'>
           <img src='/profile.png' alt='profile' className='w-1/5 h-fit' />
-          <div className='bg-[url(/chat.png)] bg-cover bg-center w-full ml-1 py-2 pl-4 pr-3 min-h-[80px] flex flex-col justify-center'>
+          <div className='bg-[url(/chat.png)] bg-cover bg-center w-full ml-1 py-2 pl-5 pr-3 min-h-[80px] flex flex-col justify-center'>
             {selectedLocation.title !== '전체 보기' ? (
               <>
                 <p className='text-base sm:text-lg md:text-xl font-bold mb-1 sm:mb-2'>
@@ -149,6 +149,8 @@ export default function QRTreasure() {
                 <p>· 6개 QR코드 중 1개 이상 스캔 시 🥛바나나우유 10명 (추첨)</p>
                 <p>· 6개 QR코드 중 3개 이상 스캔 시 ☕스타벅스 커피 3명 (추첨)</p>
                 <p>· 6개 QR코드 모두 스캔 시 🏆1명에게 스탠리 텀블러 지급 (추첨)</p>
+                <br />
+                <p>인스타그램 계정 @dokpami.nft 에서 보물 위치에 대한 힌트를 찾을 수 있어!</p>
               </div>
             </>
           ) : (
