@@ -99,7 +99,7 @@ export default function QRResult() {
     if (foundMarkers === 0) {
       return {
         count: 1,
-        img: '/pamchu.png',
+        img: '/banana.png',
         currentPresent: '아직 보물을 찾지 않았어요',
         nextPresent: '바나나우유',
       };
@@ -133,7 +133,7 @@ export default function QRResult() {
     <div className='flex flex-col w-full min-h-screen'>
       <QRHeader showBackButton={true} backTo='/qrtreasure/map' />
 
-      <div className='flex-grow flex items-center justify-center p-3'>
+      <div className='flex-grow flex items-center justify-center py-8'>
         <div className='bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center'>
           <div className='text-center mb-4'>
             <h2 className='text-2xl font-bold'>나의 보물찾기 현황</h2>
@@ -168,7 +168,7 @@ export default function QRResult() {
 
           <Link
             to='/qrtreasure/map'
-            className='flex justify-center text-[18px] bg-blue-500 hover:bg-blue-600 text-white font-bold my-4 py-3 px-6 rounded-lg transition duration-200'
+            className='flex justify-center text-xs sm:text-sm md:text-[18px] bg-blue-500 hover:bg-blue-600 text-white font-bold my-4 py-3 px-4 sm:px-6 rounded-lg transition duration-200'
           >
             보물 더 찾기
           </Link>
@@ -177,7 +177,7 @@ export default function QRResult() {
             <>
               <button
                 onClick={() => captureAndShare()}
-                className='w-full justify-center text-[18px] bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200'
+                className='w-full justify-center text-xs sm:text-sm md:text-[18px] bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 sm:px-6 rounded-lg transition duration-200'
               >
                 인스타에 공유하고 선물 받기
               </button>
