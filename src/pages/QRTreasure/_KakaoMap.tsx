@@ -72,13 +72,11 @@ export default function KakaoMap({
       const map = new window.kakao.maps.Map(mapRef.current, options);
       console.log('지도 생성됨');
 
-      const markerImgSrc =
-        'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png';
-      const checkedMarkerImgSrc =
-        'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png'; // 선택된 마커 이미지
-      const normalSize = new window.kakao.maps.Size(24, 35); // 기본 마커 사이즈
-      const hoverSize = new window.kakao.maps.Size(29, 40); // 마우스 오버시 마커 사이즈
-      const checkedSize = new window.kakao.maps.Size(35, 38); // 체크된 마커 사이즈
+      const markerImgSrc = '/marker_white.png';
+      const checkedMarkerImgSrc = '/marker_red.png'; // 선택된 마커 이미지
+      const normalSize = new window.kakao.maps.Size(30, 45); // 기본 마커 사이즈
+      const hoverSize = new window.kakao.maps.Size(32, 48); // 마우스 오버시 마커 사이즈
+      const checkedSize = new window.kakao.maps.Size(30, 45); // 체크된 마커 사이즈
 
       const normalMarkerImg = new window.kakao.maps.MarkerImage(markerImgSrc, normalSize); // 기본 마커 이미지를 생성
       const hoverMarkerImg = new window.kakao.maps.MarkerImage(markerImgSrc, hoverSize); // 호버 마커 이미지
