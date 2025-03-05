@@ -22,7 +22,6 @@ const QRHeader: React.FC<QRHeaderProps> = ({
   title = 'QR 보물찾기 이벤트',
 }) => {
   const navigate = useNavigate();
-
   const handleBack = () => {
     if (backTo) {
       navigate(backTo);
@@ -53,19 +52,17 @@ const QRHeader: React.FC<QRHeaderProps> = ({
                 strokeLinecap='round'
                 strokeLinejoin='round'
               >
-                <path d='M19 12H5M12 19l-7-7 7-7' />
+                <polyline points='15 18 9 12 15 6' />
               </svg>
             </button>
           )}
         </div>
-
         {/* 중앙 영역 (타이틀) */}
         <div className='flex-grow flex justify-center font-Jua'>
           <div className='bg-[#FFE670] rounded-full px-6 py-2 shadow-md'>
             <h1 className='font-bold text-lg md:text-xl text-center'>{title}</h1>
           </div>
         </div>
-
         {/* 오른쪽 영역 (추가 콘텐츠) */}
         <div className='w-10 flex justify-end'>{rightContent}</div>
       </div>
