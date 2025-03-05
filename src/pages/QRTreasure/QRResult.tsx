@@ -127,15 +127,13 @@ export default function QRResult() {
             className='w-full m-auto h-auto'
           />
           <p className='pt-8 text-[18px] font-bold '>
-            지금까지 {foundMarkers}개의 보물을 찾았어요!
-            <br />
-            스토리 공유하고 {remainCount()?.currentPresent}를 받아가세요🎉
+            지금까지 {foundMarkers}개의 보물을 찾았어요! 스토리 공유하고{' '}
+            {remainCount()?.currentPresent}를 받아가세요🎉
           </p>
 
           {foundMarkers !== 6 && (
             <p className=' pt-6 text-[16px]'>
-              {remainCount()?.count}개만 더 찾으면 <br />
-              {remainCount()?.nextPresent}를 받을 수 있어요!
+              {remainCount()?.count}개만 더 찾으면 {remainCount()?.nextPresent}를 받을 수 있어요!
             </p>
           )}
 
