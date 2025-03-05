@@ -5,6 +5,8 @@ export async function captureAndShare() {
 
   if (element) {
     try {
+      await document.fonts.ready;
+
       // 📸 html2canvas로 캡처
       const canvas = await html2canvas(element, {
         useCORS: true,

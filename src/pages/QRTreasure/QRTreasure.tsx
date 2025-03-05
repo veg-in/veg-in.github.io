@@ -103,16 +103,6 @@ export default function QRTreasure() {
               <>
                 <p className='text-xl font-bold mb-2'>{selectedLocation.title}</p>
                 <p className='mb-3'>{selectedLocation.description || '설명이 없습니다.'}</p>
-                <div className='text-sm'>
-                  <div>
-                    {selectedLocation.id && (
-                      <p>
-                        <strong>발견 여부:</strong>{' '}
-                        {selectedLocation.checked ? '발견함 ✓' : '아직 발견하지 않음'}
-                      </p>
-                    )}
-                  </div>
-                </div>
               </>
             ) : (
               <p>지도에서 위치를 선택하거나 마커를 클릭하면 해당 장소의 정보가 표시됩니다.</p>
@@ -147,7 +137,7 @@ export default function QRTreasure() {
                 <p className='text-[18px] font-bold underline'>상품 안내</p>
                 <p>· 6개 QR코드 중 1개 이상 스캔 시 🥛바나나우유 10명 (추첨)</p>
                 <p>· 6개 QR코드 중 3개 이상 스캔 시 ☕스타벅스 커피 3명 (추첨)</p>
-                <p>· 6개 QR코드 모두 스캔 시 🏆선착순 1명에게 스탠리 텀블러 지급</p>
+                <p>· 6개 QR코드 모두 스캔 시 🏆1명에게 스탠리 텀블러 지급 (추첨)</p>
               </div>
             </>
           ) : (
