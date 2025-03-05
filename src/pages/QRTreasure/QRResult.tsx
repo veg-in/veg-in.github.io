@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import QRHeader from './_QRHeader';
 import captureAndShare from '@/lib/share';
+import { QRLocations } from '@/data/QRMapData';
 
 export default function QRResult() {
   const navigate = useNavigate();
@@ -14,15 +15,8 @@ export default function QRResult() {
 
   useEffect(() => {
     const processQRData = () => {
-      // 전체 마커 목록 (QRTreasure의 locations 배열과 일치해야 함)
-      const allMarkers = [
-        { id: '1', hash: 'a1b2c3d4', title: '정문' },
-        { id: '2', hash: 'e5f6g7h8', title: '공학관 앞' },
-        { id: '3', hash: 'i9j0k1l2', title: '백양누리' },
-        { id: '4', hash: 'm3n4o5p6', title: '독수리상' },
-        { id: '5', hash: 'q7r8s9t0', title: '중도 앞' },
-        { id: '6', hash: 'u1v2w3x4', title: '도서관 앞 용재상' },
-      ];
+      // QRMapData에서 마커 목록 가져오기 ('전체 보기' 제외)
+      const allMarkers = QRLocations.filter((marker) => marker.id && marker.hash);
 
       // URL에서 마커 번호와 해시 추출
       const searchParams = new URLSearchParams(location.search);
@@ -133,7 +127,7 @@ export default function QRResult() {
     <div className='flex flex-col w-full min-h-screen'>
       <QRHeader showBackButton={true} backTo='/qrtreasure/map' />
 
-      <div className='flex-grow flex items-center justify-center py-8'>
+      <div className='flex-grow flex items-center justify-center py-6'>
         <div className='bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center'>
           <div className='text-center mb-4'>
             <h2 className='text-2xl font-bold'>나의 보물찾기 현황</h2>
@@ -154,9 +148,9 @@ export default function QRResult() {
               아직 보물을 찾지 않았어요. 보물을 찾아보세요!
             </p>
           ) : (
-            <p className='pt-8 text-[18px] font-bold '>
-              지금까지 {foundMarkers}개의 보물을 찾았어요! 스토리 공유하고{' '}
-              {resultInfo?.currentPresent}를 받아가세요🎉
+            <p className='pt-8 font-bold mb-4'>
+              지금까지 {foundMarkers}개의 보물을 찾았어요! <br />
+              스토리 공유하고 {resultInfo?.currentPresent}를 받아가세요🎉
             </p>
           )}
 
@@ -166,12 +160,14 @@ export default function QRResult() {
             </p>
           )}
 
-          <Link
-            to='/qrtreasure/map'
-            className='flex justify-center text-xs sm:text-sm md:text-[18px] bg-blue-500 hover:bg-blue-600 text-white font-bold my-4 py-3 px-4 sm:px-6 rounded-lg transition duration-200'
-          >
-            보물 더 찾기
-          </Link>
+          {foundMarkers !== 6 && (
+            <Link
+              to='/qrtreasure/map'
+              className='flex justify-center text-xs sm:text-sm md:text-[18px] bg-blue-500 hover:bg-blue-600 text-white font-bold my-4 py-3 px-4 sm:px-6 rounded-lg transition duration-200'
+            >
+              보물 더 찾기
+            </Link>
+          )}
 
           {foundMarkers > 0 && (
             <>

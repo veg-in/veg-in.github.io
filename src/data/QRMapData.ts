@@ -16,7 +16,7 @@ export const QRLocations: LocationData[] = [
     lng: 126.93694388240334,
     checked: false,
     id: '1',
-    hash: 'a1b2c3d4',
+    hash: '0018f5c3',
     description: '연세대학교 정문 우측의 안내판 뒤를 확인해봐. 거기에 보물이 있어!',
   },
   {
@@ -25,7 +25,7 @@ export const QRLocations: LocationData[] = [
     lng: 126.93709859192883,
     checked: false,
     id: '2',
-    hash: 'e5f6g7h8',
+    hash: '17331f46',
     description: '공학관 정문에서 백양로로 가는 길, 가로등 밑에서 보물을 찾아봐!',
   },
   {
@@ -34,7 +34,7 @@ export const QRLocations: LocationData[] = [
     lng: 126.937192,
     checked: false,
     id: '3',
-    hash: 'i9j0k1l2',
+    hash: '5887f7a8',
     description: '백양누리로 내려가는 엘리베이터 옆 벽면에 무엇인가 숨겨져 있어. 찾아보자!',
   },
   {
@@ -43,7 +43,7 @@ export const QRLocations: LocationData[] = [
     lng: 126.93720256007985,
     checked: false,
     id: '4',
-    hash: 'm3n4o5p6',
+    hash: '54a7d2c8',
     description: '독수리상 앞 벤치를 살펴봐. 바로 우측면에 뭔가가 있을 거야.',
   },
   {
@@ -52,7 +52,7 @@ export const QRLocations: LocationData[] = [
     lng: 126.93719324114102,
     checked: false,
     id: '5',
-    hash: 'q7r8s9t0',
+    hash: '5e09ed51',
     description: '도서관 정문을 찾아와! 게시판 좌측에 보물이 숨어있어.',
   },
   {
@@ -61,7 +61,7 @@ export const QRLocations: LocationData[] = [
     lng: 126.937605,
     checked: false,
     id: '6',
-    hash: 'u1v2w3x4',
+    hash: '2a71d944',
     description: '용재 백낙준 박사상 우측의 벤치 측면에서 보물을 찾을 수 있을 거야.',
   },
 ];

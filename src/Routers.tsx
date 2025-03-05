@@ -15,9 +15,9 @@ export default function Routers() {
     <Router>
       <Routes>
         <Route element={<Layout />}>
-          <Route path='/' element={<Landing />} />
+          <Route path='/klandingk' element={<Landing />} />
           {/* TODO : About이 Landing 으로 바뀌어서 /(root) 경로로 가고, */}
-          <Route path='/Intro' element={<Intro />} />
+          <Route path='/intro' element={<Intro />} />
           {/* TODO : AboutNext가 About으로 바뀌어서 /about으로 가야 함 */}
 
           {/* Balane Game Path */}

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { QRLocations } from '@/data/QRMapData';
 
 interface Location {
   title: string;
@@ -13,51 +14,8 @@ export default function QRAdmin() {
   const [baseUrl, setBaseUrl] = useState('');
 
   useEffect(() => {
-    // 위치 데이터 로드
-    setLocations([
-      {
-        title: '중도',
-        lat: 37.563743700106016,
-        lng: 126.93702902334138,
-        id: '1',
-        hash: 'a1b2c3d4',
-      },
-      {
-        title: '백주년기념관',
-        lat: 37.5620796504564,
-        lng: 126.93805190387629,
-        id: '2',
-        hash: 'e5f6g7h8',
-      },
-      {
-        title: '경영관',
-        lat: 37.56483268505036,
-        lng: 126.93899474018608,
-        id: '3',
-        hash: 'i9j0k1l2',
-      },
-      {
-        title: '대운동장',
-        lat: 37.56226633676402,
-        lng: 126.93341687864819,
-        id: '4',
-        hash: 'm3n4o5p6',
-      },
-      {
-        title: '독수리상',
-        lat: 37.56216023139825,
-        lng: 126.93708977744795,
-        id: '5',
-        hash: 'q7r8s9t0',
-      },
-      {
-        title: '학관앞',
-        lat: 37.56348529465163,
-        lng: 126.93822334786489,
-        id: '6',
-        hash: 'u1v2w3x4',
-      },
-    ]);
+    // QRLocations에서 '전체 보기'를 제외한 위치 데이터 로드
+    setLocations(QRLocations.filter((loc) => loc.id && loc.hash));
 
     // 현재 사이트의 기본 URL 설정
     setBaseUrl(window.location.origin);
