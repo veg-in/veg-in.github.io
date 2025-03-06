@@ -154,6 +154,8 @@ export default function QRTreasure() {
                 <p>· 6개 QR코드 모두 스캔 시 🏆1명에게 스탠리 텀블러 지급 (추첨)</p>
                 <br />
                 <p>인스타그램 계정 @dokpami.nft 에서 보물 위치에 대한 힌트를 찾을 수 있어!</p>
+                <br />
+                <p>비공개 계정은 스토리 올린 후 캡쳐해서 DM으로 보내줘!</p>
               </div>
             </>
           ) : (
