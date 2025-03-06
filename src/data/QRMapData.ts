@@ -30,8 +30,8 @@ export const QRLocations: LocationData[] = [
   },
   {
     title: '백양누리',
-    lat: 37.563393,
-    lng: 126.937192,
+    lat: 37.56277754159092,
+    lng: 126.93732977528495,
     checked: false,
     id: '3',
     hash: '5887f7a8',
