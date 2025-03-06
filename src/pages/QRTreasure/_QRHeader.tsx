@@ -58,8 +58,8 @@ const QRHeader: React.FC<QRHeaderProps> = ({
         </div>
         {/* 중앙 영역 (타이틀) */}
         <div className='flex-grow flex justify-center font-Jua'>
-          <div className='bg-[#FFE670] rounded-full px-6 py-2 shadow-md'>
-            <h1 className='font-bold text-lg md:text-xl text-center'>{title}</h1>
+          <div className='bg-[#FFE670] rounded-full px-4 py-2 shadow-md'>
+            <h1 className='font-bold text-center'>{title}</h1>
           </div>
         </div>
         {/* 오른쪽 영역 (추가 콘텐츠) */}
