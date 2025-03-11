@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Jua&family=Kirang+Haerang&display=swap');
 @import 'tailwindcss';
-
-@plugin 'tailwindcss-animate';
-
 @custom-variant dark (&:is(.dark *));
 
 @theme {
@@ -171,13 +168,24 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+  .text-green {
+    @apply text-[#75C526];
+  }
+  .text-yellow {
+    @apply text-[#FBBC05];
+  }
+
+  .text-blue {
+    @apply text-[#0074D2];
+  }
+
+  .text-gray {
+    @apply text-[#000000]/50;
   }
 }

@@ -8,7 +8,7 @@ export default function Login() {
   return (
     <div className='flex size-full flex-col items-center justify-center p-6 text-[14px]'>
       <div className='text-center'>
-        <h1 className='mb-2 text-3xl font-semibold text-green-600'>Veg-in</h1>
+        <h1 className='mb-2 text-3xl font-semibold text-green'>Veg-in</h1>
         <img src='/logo.png' alt='logo' className='mx-auto size-[50px]' />
       </div>
 

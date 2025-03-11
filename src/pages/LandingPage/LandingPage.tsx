@@ -1,5 +1,5 @@
 import Introduction from '@/pages/LandingPage/Introduction';
-import Landing from '@/pages/LandingPage/Landing';
+import Landing from '@/pages/LandingPage/Index';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
